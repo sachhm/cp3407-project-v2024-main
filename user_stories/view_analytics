@@ -1,0 +1,23 @@
+# User story title: View Analytics and Reports
+
+## Priority: 5  
+(Analytics is important for admin to track platform performance but is not needed for functionality)
+
+## Estimation: 3 days  
+* Jason: 3 days  
+
+
+## Assumptions:
+- Admins need a simple and clear dashboard with key metrics.
+- Reports should be available for bookings, revenue, and users.
+
+## Description:  
+As an **admin**, I want to **view analytics and reports** so that I can track platform performance and make data-driven decisions.
+
+**Description-v1:**  
+Admins can access a dashboard displaying key metrics such as the number of active users, total revenue, bookings per day, etc.
+
+## Tasks:
+1. Design dashboard layout – Estimation: 0.5 day  
+2. Display key metrics (e.g., total users, revenue) on dashboard – Estimation: 0.5 day  
+3. Implement API calls to fetch data – Estimation: 2 days  
