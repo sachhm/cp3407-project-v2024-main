@@ -5,8 +5,8 @@ Keep any other version here as well, e.g. Edit cleaner profile, Update availabil
 ## Priority: 10 (latest for iteration-1)
 This feature is crucial for the cleaner's ability to manage their bookings and services on the platform. It is a core functionality that allows cleaners to offer their services effectively.
 
-## Estimation: 9 days
-* Jason: 9 days (e.g. estimated before iteration-1)
+## Estimation: 5 days
+* Jason: 5 days
 
 
 ## Assumptions:
@@ -17,9 +17,9 @@ This feature is crucial for the cleaner's ability to manage their bookings and s
 Description-v1: The cleaner will have the ability to create and update their profile with information such as name, service offerings, and available time slots. They can also set their availability and adjust it at any time.
 
 ## Tasks, see chapter 4
-1. Design the cleaner profile page UI, Estimation 3 day
-2. Implement functionality for profile creation, Estimation 3 days
-3. Implement calendar for availability management, Estimation 3 day
+1. Design the cleaner profile page UI, Estimation 1 day
+2. Implement functionality for profile creation, Estimation 2 days
+3. Implement calendar for availability management, Estimation 2 day
 
 # UI Design:
 * The cleaner profile page will have a simple layout with input fields for personal details and service offerings.
