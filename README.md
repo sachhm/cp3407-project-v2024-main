@@ -34,7 +34,7 @@ Checklist/TODOs:
 * [Manage providers](./user_stories/manage_providers), priority 10, 3 days
 * [View analytics](./user_stories/view_analytics), priority 5, 3 days
 
-Total: YY days
+Total: 19 days
 
 
 # Assignment-2: Iterations
