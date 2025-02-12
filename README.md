@@ -27,8 +27,12 @@ Checklist/TODOs:
 * github entry timestamp is BEFORE the iteration-1
 * User stories are correct: see p39
 * Must have more user stories than fits into iterations 1 and 2. To practice the priority.
-* [user story title](./user_stories/user_story_01_title.md), priority XX, YY days 
-* ...
+* [Generate platform analytics](./user_stories/generate_platform_analytics), priority 8, 3 days
+* [Make a payment](./user_stories/make_a_payment), priority 2, 4 days
+* [Make a booking](./user_stories/making_a_booking), priority 10, 4 days
+* [Manage availability](./user_stories/manage_booking), priority 10, 5 days
+* [Manage providers](./user_stories/manage_providers), priority 10, 3 days
+* [View analytics](./user_stories/view_analytics), priority 5, 3 days
 
 Total: YY days
 
