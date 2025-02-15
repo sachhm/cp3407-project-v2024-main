@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - MyClean </title>
+    <title>Home - MyClean</title>
 </head>
 <body>
     <h1>Welcome to MyClean</h1>
@@ -12,5 +12,21 @@
         <li><a href="manage_availability.html">Manage availability</a></li>
         <li><a href="manage_providers.html">Manage providers</a></li>
     </ul>
+
+    <h2>Bookings</h2>
+    <div id="bookings"></div>
+
+    <script>
+        // Fetch bookings from the backend
+        fetch('http://localhost:3000/api/bookings')
+            .then(response => response.json())
+            .then(bookings => {
+                const bookingsDiv = document.getElementById('bookings');
+                bookings.forEach(booking => {
+                    bookingsDiv.innerHTML += `<p>Booking ID: ${booking.id}, User ID: ${booking.user_id}, Service ID: ${booking.service_id}, Date: ${booking.booking_date}, Status: ${booking.status}</p>`;
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
 </body>
 </html>
