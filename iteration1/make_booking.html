@@ -1,54 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make a Booking</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Make a Booking</h1>
-    <form id="bookingForm">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
-        
-        <label for="address">Address:</label>
-        <input type="text" id="address" name="address" required><br>
-        
-        <label for="bookingDate">Booking Date:</label>
-        <input type="date" id="bookingDate" name="booking_date" required><br>
-        
-        <label for="status">Cleaning Type:</label>
-        <select id="status" name="status" required>
-            <option value="light clean">Light Clean</option>
-            <option value="medium clean">Medium Clean</option>
-            <option value="deep clean">Deep Clean</option>
-        </select><br>
-        
-        <button type="submit">Submit</button>
-    </form>
+  <h1>Make a Booking</h1>
+  <form id="bookingForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
 
-    <script>
-        document.getElementById('bookingForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const data = Object.fromEntries(formData.entries());
+    <label for="service">Service:</label>
+    <input type="text" id="service" name="service" required><br>
 
-            console.log('Form data:', data); // Log form data
+    <label for="date">Booking Date:</label>
+    <input type="date" id="date" name="booking_date" required><br>
 
-            fetch('http://localhost:3000/api/bookings', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
-                alert('Booking created successfully!');
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    </script>
+    <label for="status">Status:</label>
+    <select id="status" name="status" required>
+      <option value="light clean">Light Clean</option>
+      <option value="medium clean">Medium Clean</option>
+      <option value="deep clean">Deep Clean</option>
+    </select><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script src="db.js"></script>
+  <script>
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData.entries());
+      const booking = addBooking(data);
+      alert('Booking created with ID: ' + booking.id);
+    });
+  </script>
 </body>
 </html>

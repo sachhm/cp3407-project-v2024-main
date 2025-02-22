@@ -1,33 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - MyClean</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home - MyClean</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to MyClean</h1>
-    <ul>    
-        <li><a href="make_booking.html">Customer Panel</a></li>
-        <li><a href="manage_availability.html">Cleaner Panel</a></li>
-        <li><a href="manage_providers.html">Admin Panel</a></li>
-    </ul>
+  <h1>Welcome to MyClean</h1>
+  <ul>    
+    <li><a href="make_booking.html">Customer Panel</a></li>
+    <li><a href="manage_availability.html">Cleaner Panel</a></li>
+    <li><a href="manage_providers.html">Admin Panel</a></li>
+  </ul>
 
-    <h2>Bookings</h2>
-    <div id="bookings"></div>
+  <h2>Bookings</h2>
+  <div id="bookings">Loading...</div>
 
-    <script>
-        // Fetch bookings from the backend
-        fetch('http://localhost:3000/api/bookings')
-            .then(response => response.json())
-            .then(bookings => {
-                const bookingsDiv = document.getElementById('bookings');
-                bookings.forEach(booking => {
-                    bookingsDiv.innerHTML += `<p>Booking ID: ${booking.id}, User ID: ${booking.user_id}, Service ID: ${booking.service_id}, Date: ${booking.booking_date}, Status: ${booking.status}</p>`;
-                });
-            })
-            .catch(error => console.error('Error:', error));
-    </script>
+  <script src="db.js"></script>
+  <script>
+    displayBookings();
+  </script>
 </body>
 </html>
