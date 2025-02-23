@@ -1,81 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cleaner Availability</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cleaner Availability</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <ul>    
+    <li><a href="make_booking.html">Customer Panel</a></li>
+    <li><a href="manage_availability.html">Cleaner Panel</a></li>
+    <li><a href="manage_providers.html">Admin Panel</a></li>
+    <li><a href="index.html">Home</a></li>
+  </ul>
 
-    <ul>    
-        <li><a href="make_booking.html">Customer Panel</a></li>
-        <li><a href="manage_availability.html">Cleaner Panel</a></li>
-        <li><a href="manage_providers.html">Admin Panel</a></li>
-        <li><a href="index.html">Home</a></li>
-      </ul>
+  <h1>Set Your Availability</h1>
+  <form id="availabilityForm">
+      <label for="cleanerName">Name:</label>
+      <input type="text" id="cleanerName" name="cleaner_name" required><br>
 
-    <h1>Set Your Availability</h1>
-    <form id="availabilityForm">
-        <label for="cleanerName">Name:</label>
-        <input type="text" id="cleanerName" name="cleaner_name" required><br>
+      <label>Available Dates:</label>
+      <div id="dateContainer">
+          <input type="date" class="available-date">
+      </div>
+      <button type="button" id="addDate">Add Another Date</button><br>
 
-        <label>Available Dates:</label>
-        <div id="dateContainer">
-            <input type="date" class="available-date">
-        </div>
-        <button type="button" id="addDate">Add Another Date</button><br>
+      <button type="submit">Submit</button>
+  </form>
 
-        <button type="submit">Submit</button>
-    </form>
+  <!-- Display current provider availability -->
+  <h2>Current Provider Availability</h2>
+  <div id="availabilityList">Loading...</div>
 
-    <script>
-        document.getElementById('addDate').addEventListener('click', function () {
-            const dateContainer = document.getElementById('dateContainer');
-            const newDateInput = document.createElement('input');
-            newDateInput.type = 'date';
-            newDateInput.classList.add('available-date');
+  <!-- Load the local JSON database module -->
+  <script src="db.js"></script>
+  <!-- Inline script for adding and displaying availability -->
+  <script>
+    // Add a new date input field on clicking Add Another Date:
+    document.getElementById('addDate').addEventListener('click', function () {
+      const dateContainer = document.getElementById('dateContainer');
+      const newDateInput = document.createElement('input');
+      newDateInput.type = 'date';
+      newDateInput.classList.add('available-date');
 
-            const removeBtn = document.createElement('button');
-            removeBtn.textContent = 'Remove';
-            removeBtn.type = 'button';
-            removeBtn.onclick = function () {
-                dateContainer.removeChild(newDateInput);
-                dateContainer.removeChild(removeBtn);
-            };
+      const removeBtn = document.createElement('button');
+      removeBtn.textContent = 'Remove';
+      removeBtn.type = 'button';
+      removeBtn.onclick = function () {
+          dateContainer.removeChild(newDateInput);
+          dateContainer.removeChild(removeBtn);
+      };
 
-            dateContainer.appendChild(newDateInput);
-            dateContainer.appendChild(removeBtn);
-        });
+      dateContainer.appendChild(newDateInput);
+      dateContainer.appendChild(removeBtn);
+    });
 
-        document.getElementById('availabilityForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-            const formData = new FormData(event.target);
-            const name = formData.get('cleaner_name');
-            const dateInputs = document.querySelectorAll('.available-date');
-            const availableDates = Array.from(dateInputs).map(input => input.value).filter(date => date);
+    // On form submit, save the cleaner's availability using addAvailability()
+    document.getElementById('availabilityForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const cleanerName = formData.get('cleaner_name');
+      const dateInputs = document.querySelectorAll('.available-date');
+      const availableDates = Array.from(dateInputs)
+                                  .map(input => input.value)
+                                  .filter(date => date);
 
-            if (availableDates.length === 0) {
-                alert('Please select at least one available date.');
-                return;
-            }
+      if (availableDates.length === 0) {
+          alert('Please select at least one available date.');
+          return;
+      }
 
-            const data = { cleaner_name: name, available_dates: availableDates };
-            console.log('Availability Data:', data); // Log form data
+      const availabilityData = { cleaner_name: cleanerName, available_dates: availableDates };
+      const result = addAvailability(availabilityData);
+      alert('Availability submitted with ID: ' + result.id);
+      event.target.reset();
+      displayAvailability();
+    });
 
-            fetch('http://localhost:3000/api/availability', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(result => {
-                alert('Availability submitted successfully!');
-            })
-            .catch(error => console.error('Error:', error));
-        });
-    </script>
+    // Function to display all provider availability entries
+    function displayAvailability() {
+      const availability = getAllAvailability();
+      const availabilityList = document.getElementById('availabilityList');
+      if (availability.length === 0) {
+        availabilityList.innerHTML = '<p>No availability data stored.</p>';
+        return;
+      }
+      availabilityList.innerHTML = '';
+      availability.forEach(function(avail) {
+        availabilityList.innerHTML += `<p>ID: ${avail.id}, Name: ${avail.cleaner_name}, Dates: ${avail.available_dates.join(', ')}</p>`;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      displayAvailability();
+    });
+  </script>
 </body>
 </html>

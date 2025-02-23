@@ -15,6 +15,7 @@ ul {
   list-style: none;
   padding: 0;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 ul li {
@@ -66,11 +67,40 @@ button:hover {
   background: #0056b3;
 }
 
-#bookings {
+/* Provider Availability Section Styles */
+#dateContainer {
+  background: #fafafa;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+#dateContainer input[type="date"] {
+  margin-bottom: 10px;
+}
+
+#dateContainer button {
+  background: #e74c3c;
+  margin-bottom: 10px;
+}
+
+#availabilityList {
   background: #fff;
   padding: 15px;
   margin: 20px auto;
   max-width: 800px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  font-size: 14px;
+}
+
+#availabilityList p {
+  padding: 5px 0;
+  border-bottom: 1px solid #f0f0f0;
+  margin: 0;
+}
+
+#availabilityList p:last-child {
+  border-bottom: none;
 }

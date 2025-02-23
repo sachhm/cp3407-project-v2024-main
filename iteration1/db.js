@@ -1,27 +1,30 @@
-// Key used in localStorage
+// Key used in localStorage for the database
 const DB_KEY = 'myclean_db';
 
 // Initialize the "database" if needed
 function initDB() {
   if (!localStorage.getItem(DB_KEY)) {
-    // Initialize with an object containing bookings array.
-    const initialDB = { bookings: [] };
+    // Database now holds both bookings and provider availability arrays.
+    const initialDB = { 
+      bookings: [],
+      availability: []
+    };
     localStorage.setItem(DB_KEY, JSON.stringify(initialDB, null, 2));
   }
 }
 
-// Retrieve the entire DB object (as JSON)
+// Retrieve the entire database object
 function getDB() {
   initDB();
   return JSON.parse(localStorage.getItem(DB_KEY));
 }
 
-// Save the DB object to localStorage
+// Save the database object to localStorage
 function saveDB(db) {
   localStorage.setItem(DB_KEY, JSON.stringify(db, null, 2));
 }
 
-// Add a new booking, returns the booking
+// Booking functions
 function addBooking(booking) {
   const db = getDB();
   // Generate an ID using a timestamp
@@ -31,7 +34,20 @@ function addBooking(booking) {
   return booking;
 }
 
-// Retrieve all bookings
 function getAllBookings() {
   return getDB().bookings;
+}
+
+// Provider availability functions
+function addAvailability(availability) {
+  const db = getDB();
+  // Generate an ID using a timestamp
+  availability.id = Date.now();
+  db.availability.push(availability);
+  saveDB(db);
+  return availability;
+}
+
+function getAllAvailability() {
+  return getDB().availability;
 }
