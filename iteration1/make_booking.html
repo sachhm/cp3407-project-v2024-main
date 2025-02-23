@@ -15,8 +15,8 @@
     <label for="service">Service:</label>
     <input type="text" id="service" name="service" required><br>
 
-    <label for="date">Booking Date:</label>
-    <input type="date" id="date" name="booking_date" required><br>
+    <label for="bookingDate">Booking Date:</label>
+    <input type="date" id="bookingDate" name="booking_date" required><br>
 
     <label for="status">Status:</label>
     <select id="status" name="status" required>
@@ -28,15 +28,41 @@
     <button type="submit">Submit</button>
   </form>
 
+  <!-- Load the local "JSON database" module -->
   <script src="db.js"></script>
   <script>
     document.getElementById('bookingForm').addEventListener('submit', function(event) {
       event.preventDefault();
       const formData = new FormData(event.target);
       const data = Object.fromEntries(formData.entries());
-      const booking = addBooking(data);
-      alert('Booking created with ID: ' + booking.id);
+      const newBooking = addBooking(data);
+      alert('Booking created with ID: ' + newBooking.id);
+      event.target.reset();
     });
   </script>
+
+<h2>Current Bookings</h2>
+<div id="bookings">Loading...</div>
+<!-- Inline script to define and display bookings -->
+<script>
+  // This function retrieves all bookings from localStorage via getAllBookings() (defined in db.js)
+  // and updates the #bookings div with the list.
+  function displayBookings() {
+    const bookings = getAllBookings();
+    const bookingsDiv = document.getElementById('bookings');
+    if (bookings.length === 0) {
+      bookingsDiv.innerHTML = '<p>No bookings stored.</p>';
+      return;
+    }
+    bookingsDiv.innerHTML = '';
+    bookings.forEach(function(booking) {
+      bookingsDiv.innerHTML += `<p>ID: ${booking.id}, Name: ${booking.name}, Service: ${booking.service}, Date: ${booking.booking_date}, Status: ${booking.status}</p>`;
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    displayBookings();
+  });
+</script>
 </body>
 </html>
