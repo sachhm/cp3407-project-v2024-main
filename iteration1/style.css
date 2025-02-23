@@ -85,7 +85,7 @@ button:hover {
   margin-bottom: 10px;
 }
 
-#availabilityList {
+#bookings, #availabilityList {
   background: #fff;
   padding: 15px;
   margin: 20px auto;
