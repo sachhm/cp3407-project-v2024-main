@@ -6,6 +6,13 @@ body {
   color: #333;
 }
 
+nav{
+  background: #dddee0;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
 h1, h2 {
   color: #222;
   text-align: center;
@@ -103,4 +110,56 @@ button:hover {
 
 #availabilityList p:last-child {
   border-bottom: none;
+}
+
+/* Existing styles... */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f4f4f4;
+  color: #333;
+}
+
+/* Navigation styling */
+nav {
+  background: #dddee0;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Header styles */
+h1, h2 {
+  color: #222;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+ul li {
+  display: inline-block;
+}
+
+/* Footer styling - matches nav color and is locked to the bottom */
+footer {
+  background: #dddee0;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+}
+
+/* Optional: add bottom padding to body content to avoid overlap with the fixed footer */
+body {
+  padding-bottom: 60px;
 }
