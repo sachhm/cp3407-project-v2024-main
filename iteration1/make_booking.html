@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Make a Booking</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
   <nav>
     <ul>
@@ -39,27 +37,28 @@
     <button type="submit">Submit</button>
   </form>
 
-  <!-- Load the local "JSON database" module -->
-  <script src="db.js"></script>
-  <script>
-    document.getElementById('bookingForm').addEventListener('submit', function (event) {
+  <!-- Include Supabase client library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script type="module">
+    import { addBooking, getAllBookings } from './db.js';
+
+    document.getElementById('bookingForm').addEventListener('submit', async function (event) {
       event.preventDefault();
       const formData = new FormData(event.target);
       const data = Object.fromEntries(formData.entries());
-      const newBooking = addBooking(data);
-      alert('Booking created with ID: ' + newBooking.id);
+      const newBooking = await addBooking(data);
+      if (newBooking) {
+        alert('Booking created with ID: ' + newBooking.id);
+      } else {
+        alert('Error creating booking.');
+      }
       event.target.reset();
+      displayBookings();
     });
-  </script>
 
-  <h2>Current Bookings</h2>
-  <div id="bookings">Loading...</div>
-  <!-- Inline script to define and display bookings -->
-  <script>
-    // This function retrieves all bookings from localStorage via getAllBookings() (defined in db.js)
-    // and updates the #bookings div with the list.
-    function displayBookings() {
-      const bookings = getAllBookings();
+    // Function to display all bookings
+    async function displayBookings() {
+      const bookings = await getAllBookings();
       const bookingsDiv = document.getElementById('bookings');
       if (bookings.length === 0) {
         bookingsDiv.innerHTML = '<p>No bookings stored.</p>';
@@ -76,10 +75,11 @@
     });
   </script>
 
+  <h2>Current Bookings</h2>
+  <div id="bookings">Loading...</div>
 
-<footer>
-  <p>&copy; 2021 MyClean</p>
-</footer>
+  <footer>
+    <p>&copy; 2021 MyClean</p>
+  </footer>
 </body>
-
 </html>

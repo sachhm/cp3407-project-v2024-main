@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home - MyClean</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
   <nav>
     <ul>
@@ -20,9 +18,34 @@
 
   <h1>Welcome to MyClean</h1>
 
+  <h2>Bookings</h2>
+  <div id="bookings">Loading...</div>
+
+  <!-- Include Supabase client library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script type="module">
+    import { getAllBookings } from './db.js';
+
+    async function displayBookings() {
+      const bookings = await getAllBookings();
+      const bookingsDiv = document.getElementById('bookings');
+      if (bookings.length === 0) {
+        bookingsDiv.innerHTML = '<p>No bookings stored.</p>';
+        return;
+      }
+      bookingsDiv.innerHTML = '';
+      bookings.forEach(function (booking) {
+        bookingsDiv.innerHTML += `<p>ID: ${booking.id}, Name: ${booking.name}, Service: ${booking.service}, Date: ${booking.booking_date}, Status: ${booking.status}</p>`;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      displayBookings();
+    });
+  </script>
+
   <footer>
     <p>&copy; 2021 MyClean</p>
   </footer>
 </body>
-
 </html>

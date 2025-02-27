@@ -1,53 +1,75 @@
-// Key used in localStorage for the database
-const DB_KEY = 'myclean_db';
+// Initialize Supabase client
+const supabaseUrl = 'https://mgbekoeqtysnuoshxwup.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1nYmVrb2VxdHlzbnVvc2h4d3VwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NDA0NDAsImV4cCI6MjA1NjIxNjQ0MH0.6V8KdhJl_ySCe1ti0OQj5NeiG92tOvF0Egc6f03fFn0';
 
-// Initialize the "database" if needed
-function initDB() {
-  if (!localStorage.getItem(DB_KEY)) {
-    // Database now holds both bookings and provider availability arrays.
-    const initialDB = { 
-      bookings: [],
-      availability: []
-    };
-    localStorage.setItem(DB_KEY, JSON.stringify(initialDB, null, 2));
+// Create the Supabase client using the CDN-loaded version
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+// Function to add a new booking
+async function addBooking(bookingData) {
+  const { data, error } = await supabase
+    .from('bookings')
+    .insert([
+      {
+        name: bookingData.name,
+        service: bookingData.service,
+        booking_date: bookingData.booking_date,
+        status: bookingData.status
+      }
+    ])
+    .select();
+
+  if (error) {
+    console.error('Error adding booking:', error);
+    return null;
   }
+  return data[0];
 }
 
-// Retrieve the entire database object
-function getDB() {
-  initDB();
-  return JSON.parse(localStorage.getItem(DB_KEY));
+// Function to get all bookings
+async function getAllBookings() {
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('*');
+
+  if (error) {
+    console.error('Error fetching bookings:', error);
+    return [];
+  }
+  return data;
 }
 
-// Save the database object to localStorage
-function saveDB(db) {
-  localStorage.setItem(DB_KEY, JSON.stringify(db, null, 2));
+// Function to add a new cleaner availability
+async function addAvailability(availabilityData) {
+  const { data, error } = await supabase
+    .from('availability')
+    .insert([
+      {
+        cleaner_name: availabilityData.cleaner_name,
+        available_dates: availabilityData.available_dates
+      }
+    ])
+    .select();
+
+  if (error) {
+    console.error('Error adding availability:', error);
+    return null;
+  }
+  return data[0];
 }
 
-// Booking functions
-function addBooking(booking) {
-  const db = getDB();
-  // Generate an ID using a timestamp
-  booking.id = Date.now();
-  db.bookings.push(booking);
-  saveDB(db);
-  return booking;
+// Function to get all cleaner availability
+async function getAllAvailability() {
+  const { data, error } = await supabase
+    .from('availability')
+    .select('*');
+
+  if (error) {
+    console.error('Error fetching availability:', error);
+    return [];
+  }
+  return data;
 }
 
-function getAllBookings() {
-  return getDB().bookings;
-}
-
-// Provider availability functions
-function addAvailability(availability) {
-  const db = getDB();
-  // Generate an ID using a timestamp
-  availability.id = Date.now();
-  db.availability.push(availability);
-  saveDB(db);
-  return availability;
-}
-
-function getAllAvailability() {
-  return getDB().availability;
-}
+// Export the functions
+export { addBooking, getAllBookings, addAvailability, getAllAvailability };
