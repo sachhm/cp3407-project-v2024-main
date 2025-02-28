@@ -1,9 +1,12 @@
+// Import Supabase client library properly
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
 // Initialize Supabase client
 const supabaseUrl = 'https://mgbekoeqtysnuoshxwup.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1nYmVrb2VxdHlzbnVvc2h4d3VwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NDA0NDAsImV4cCI6MjA1NjIxNjQ0MH0.6V8KdhJl_ySCe1ti0OQj5NeiG92tOvF0Egc6f03fFn0';
 
-// Create the Supabase client using the CDN-loaded version
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+// Create Supabase client
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Function to add a new booking
 async function addBooking(bookingData) {
