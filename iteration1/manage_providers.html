@@ -42,9 +42,12 @@
   <h2>Current Providers</h2>
   <div id="providersList">Loading...</div>
 
+  <h2>Summary Statistics</h2>
+  <div id="summaryStats">Loading...</div>
+
   <!-- Include Supabase client library -->
   <script type="module">
-    import { addProvider, getAllProviders, deleteProvider } from './db.js';
+    import { addProvider, getAllProviders, deleteProvider, getSummaryStats } from './db.js';
 
     document.getElementById('providerForm').addEventListener('submit', async function (event) {
       event.preventDefault();
@@ -57,6 +60,7 @@
         alert('Provider added with ID: ' + newProvider.id);
         event.target.reset();
         displayProviders();
+        displaySummaryStats();
       } else {
         alert('Error adding provider.');
       }
@@ -97,13 +101,32 @@
         if (success) {
           alert('Provider deleted successfully');
           displayProviders();
+          displaySummaryStats();
         } else {
           alert('Error deleting provider.');
         }
       }
     };
 
-    document.addEventListener('DOMContentLoaded', displayProviders);
+    async function displaySummaryStats() {
+      const stats = await getSummaryStats();
+      const statsDiv = document.getElementById('summaryStats');
+      
+      if (!stats) {
+        statsDiv.innerHTML = '<p>Error fetching summary statistics.</p>';
+        return;
+      }
+      
+      statsDiv.innerHTML = `
+        <p>Total Bookings: ${stats.totalBookings}</p>
+        <p>Total Providers: ${stats.totalProviders}</p>
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      displayProviders();
+      displaySummaryStats();
+    });
   </script>
 
   <footer>

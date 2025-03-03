@@ -1,165 +1,178 @@
-body {
-  font-family: Arial, sans-serif;
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Global Reset & Base Styles */
+* {
   margin: 0;
-  padding: 20px;
-  background: #f4f4f4;
-  color: #333;
-}
-
-nav{
-  background: #dddee0;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-}
-
-h1, h2 {
-  color: #222;
-  text-align: center;
-}
-
-ul {
-  list-style: none;
   padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  background: #f7f9fc;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px 20px 80px; /* Bottom padding for fixed footer */
+}
+
+/* Navigation */
+nav {
+  background: linear-gradient(90deg, #4a90e2, #357ab8);
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+nav ul li {
+  margin: 0;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #d1e9ff;
+}
+
+/* Headings */
+h1, h2 {
   text-align: center;
   margin-bottom: 20px;
+  color: #222;
 }
 
-ul li {
-  display: inline-block;
-  margin: 0 10px;
+h1 {
+  font-size: 2em;
+  font-weight: 700;
 }
 
-a {
-  text-decoration: none;
-  color: #007BFF;
+h2 {
+  font-size: 1.5em;
+  font-weight: 500;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
+/* Forms */
 form {
   background: #fff;
   max-width: 500px;
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin: 0 auto 30px;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+form label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
 }
 
 input[type="text"],
-input[type="number"],
+input[type="email"],
+input[type="tel"],
 input[type="date"],
-input[type="datetime-local"],
 select,
 button {
   display: block;
   width: 100%;
-  padding: 10px;
-  margin: 10px 0;
+  padding: 12px;
+  margin: 10px 0 20px;
   border: 1px solid #ccc;
-  border-radius: 3px;
-  box-sizing: border-box;
+  border-radius: 5px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74,144,226,0.5);
+  outline: none;
 }
 
 button {
-  background: #007BFF;
+  background: #4a90e2;
   color: #fff;
   border: none;
+  font-weight: 500;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background: #0056b3;
+  background: #357ab8;
 }
 
-/* Provider Availability Section Styles */
-#dateContainer {
-  background: #fafafa;
-  border: 1px solid #ddd;
-  padding: 10px;
-  border-radius: 3px;
-  margin-bottom: 10px;
-}
-
-#dateContainer input[type="date"] {
-  margin-bottom: 10px;
-}
-
-#dateContainer button {
-  background: #e74c3c;
-  margin-bottom: 10px;
-}
-
-#bookings, #availabilityList {
+/* Containers for dynamic content */
+.container {
   background: #fff;
-  padding: 15px;
-  margin: 20px auto;
-  max-width: 800px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  font-size: 14px;
-}
-
-#availabilityList p {
-  padding: 5px 0;
-  border-bottom: 1px solid #f0f0f0;
-  margin: 0;
-}
-
-#availabilityList p:last-child {
-  border-bottom: none;
-}
-
-/* Existing styles... */
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
   padding: 20px;
-  background: #f4f4f4;
-  color: #333;
+  margin: 0 auto 30px;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-/* Navigation styling */
-nav {
-  background: #dddee0;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
+/* Provider List & Booking Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 0;
 }
 
-/* Header styles */
-h1, h2 {
-  color: #222;
-  text-align: center;
+table, th, td {
+  border: 1px solid #e0e6ed;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
-  text-align: center;
-  margin-bottom: 20px;
+th, td {
+  padding: 12px;
+  text-align: left;
 }
 
-ul li {
-  display: inline-block;
+th {
+  background: #f7f9fc;
+  font-weight: 500;
 }
 
-/* Footer styling - matches nav color and is locked to the bottom */
+/* Specific Containers */
+#providersList,
+#summaryStats,
+#availabilityList,
+#bookings {
+  /* Ensure these sections are wrapped in the same container style */
+  background: #fff;
+  padding: 20px;
+  margin: 0 auto 30px;
+  max-width: 800px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Footer */
 footer {
-  background: #dddee0;
+  background: #4a90e2;
   color: #fff;
   text-align: center;
-  padding: 10px;
+  padding: 15px;
   position: fixed;
   bottom: 0;
   width: 100%;
   left: 0;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
 }
 
-/* Optional: add bottom padding to body content to avoid overlap with the fixed footer */
-body {
-  padding-bottom: 60px;
+/* Utility Classes */
+.center {
+  text-align: center;
 }

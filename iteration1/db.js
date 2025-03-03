@@ -135,9 +135,33 @@ async function deleteAvailability(availabilityId) {
   return true;
 }
 
+///// --- SUMMARY STATISTICS --- /////
+
+// Function to get summary statistics
+async function getSummaryStats() {
+  const { data: bookings, error: bookingsError } = await supabase
+    .from('bookings')
+    .select('id');
+
+  const { data: providers, error: providersError } = await supabase
+    .from('providers')
+    .select('id');
+
+  if (bookingsError || providersError) {
+    console.error('Error fetching summary statistics:', bookingsError || providersError);
+    return null;
+  }
+
+  return {
+    totalBookings: bookings.length,
+    totalProviders: providers.length
+  };
+}
+
 // Export all functions
 export { 
   addBooking, getAllBookings, deleteBooking,
   addProvider, getAllProviders, deleteProvider,
-  addAvailability, getAllAvailability, deleteAvailability
+  addAvailability, getAllAvailability, deleteAvailability,
+  getSummaryStats
 };

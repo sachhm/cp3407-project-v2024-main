@@ -1,25 +1,34 @@
-
-How to edit this: 
-* Option-1 (tested and worked ok): PyCharm supports editing of these .md files. Then you need to push to the main branch or make a pull request.
-* Option-2 (tested ok): Edit and commit it directly on github. Then any local repo copies will need to be "updated".
-
-# cp3407-project-v2024 template [Delete or change to your team/project name before submitting]
-
-This a project assignment template for CP3407. 
-The following is the list of items, which are required to be completed.
-
-## How to submit [You may delete this before submitting]
-
-2. Add your instructor (JCU-Australia: jc138691@gmail.com Dmitry Konovalov) as a team member to view your project on github
-1. Submit link to your repository
-2. Download your github repository as a zip file and submit via LearnJCU.
+# Clean Connect - Cleaning Service Management Platform
 
 ## Team
+1. Sachh Ariel Moka (Team Lead, Backend Development)
+2. Jason James Keatley (Frontend Development, UX Design)
 
-It is recommended to complete this assignment in a group of 2-4 students.
-1. Sachh Ariel Moka
-2. Jason James Keatley
+## Project Overview
+Clean Connect is a comprehensive platform that connects cleaning service providers with customers while streamlining booking management and analytics. The system aims to modernize the cleaning service industry through digital transformation.
 
+## Core Features
+- Seamless booking management system
+- Real-time availability tracking
+- Secure payment processing
+- Advanced analytics dashboard
+- Provider management portal
+
+## Technical Stack
+- Frontend: React.js with Material-UI
+- Backend: Node.js with Supabase
+- Database: PostgreSQL (via Supabase)
+- Authentication: Supabase Auth
+- Analytics: Custom analytics engine
+
+## Project Timeline
+### Iteration 1 (Feb 15 - March 7, 2024)
+Focus: Core Booking System & Provider Management
+[Details in iteration_1.md]
+
+### Iteration 2 (March 8 - March 29, 2024)
+Focus: Payments & Analytics
+[Details in iteration_2.md]
 
 # Assignment-1: project planning BEFORE iteration-1, (see chapters 1-3)
 Checklist/TODOs: 
