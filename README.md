@@ -35,14 +35,6 @@ Checklist/TODOs:
 * github entry timestamp is BEFORE the iteration-1
 * User stories are correct: see p39
 * Must have more user stories than fits into iterations 1 and 2. To practice the priority.
-* [Generate platform analytics](./user_stories/generate_platform_analytics), priority 8, 3 days
-* [Make a payment](./user_stories/make_a_payment), priority 2, 4 days
-* [Make a booking](./user_stories/making_a_booking), priority 10, 4 days
-* [Manage availability](./user_stories/manage_booking), priority 10, 5 days
-* [Manage providers](./user_stories/manage_providers), priority 10, 3 days
-* [View analytics](./user_stories/view_analytics), priority 5, 3 days
-
-Total: 19 days
 
 
 # Assignment-2: Iterations
@@ -53,10 +45,19 @@ Total: 19 days
 * Update the following during each week prac session
 * During pracs, you may experiment with using other github ways of tracking changes, e.g. via pull requests.
 
-1. [user story title](./user_stories/user_story_01_title.md), priority XX, YY days 
-2. ...
+[User Stories](https://github.com/sachhm/cp3407-project-v2024-main/tree/main/user_stories)
 
-Total: YY days
+### **Iteration 1 Goals**  
+
+- [ ] **Generate Platform Analytics(./user_stories/generate_platform_analytics)** | Priority: Low | Estimate: 3 days  
+- [ ] **Make a Payment(./user_stories/make_a_payment)** | Priority: Low | Estimate: 4 days  
+- [ ] **Make a Booking(./user_stories/making_a_booking)** | Priority: High | Estimate: 4 days  
+- [ ] **Manage Availability(./user_stories/manage_booking)** | Priority: High | Estimate: 5 days  
+- [ ] **Manage Providers(./user_stories/manage_providers)** | Priority: High | Estimate: 3 days  
+- [ ] **View Analytics(./user_stories/view_analytics)** | Priority: Medium | Estimate: 3 days  
+
+**Total Estimate**: 19 days 
+
 
 
 ### Iteration 2 [duration 3-4 weeks], add your start and end dates
