@@ -25,9 +25,21 @@ Completed:
 * 1 week left, 2 days
 * 0 weeks left, 0 days
 * Actual Velocity: 5 days/week
+  
+  
+# Retrospective for Iteration 1
 
-## Retrospective for Iteration 1
-- What went well: ...
-- What could be improved: ...
-- Action items for next iteration: ...
+## What Went Well
+- We successfully developed a minimum viable product (MVP) that effectively manages customer bookings, provider availabilities, and administrative tasks such as adding or removing providers.  
+- The user interface was designed with clarity and usability in mind, ensuring a seamless experience.  
+- Our backend setup was structured efficiently, allowing for straightforward deployment and scalability.  
+
+## Areas for Improvement
+- Progress in Iteration 1 was slower than anticipated due to limited experience with Agile methodologies and difficulties in selecting a suitable database solution.  
+- While team communication was strong, inconsistent meeting schedules impacted productivity and alignment on key tasks.  
+
+## Action Plan for Next Iteration
+- Prioritize and complete the remaining user stories from Iteration 1 to maintain development momentum.  
+- Foster a more structured Agile approach, including frequent stand-ups and improved sprint planning.  
+- Transition MyClean from a basic proof of concept to a fully functional, production-ready application with robust backend and frontend enhancements.  
 

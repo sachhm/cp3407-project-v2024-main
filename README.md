@@ -1,11 +1,11 @@
-# Clean Connect - Cleaning Service Management Platform
+# MyClean - Cleaning Service Management Platform
 
 ## Team
 1. Sachh Ariel Moka (Team Lead, Backend Development)
 2. Jason James Keatley (Frontend Development, UX Design)
 
 ## Project Overview
-Clean Connect is a comprehensive platform that connects cleaning service providers with customers while streamlining booking management and analytics. The system aims to modernize the cleaning service industry through digital transformation.
+MyClean is a comprehensive platform that connects cleaning service providers with customers while streamlining booking management and analytics. The system aims to modernize the cleaning service industry through digital transformation.
 
 ## Core Features
 - Seamless booking management system
@@ -18,7 +18,6 @@ Clean Connect is a comprehensive platform that connects cleaning service provide
 - Frontend: React.js with Material-UI
 - Backend: Node.js with Supabase
 - Database: PostgreSQL (via Supabase)
-- Authentication: Supabase Auth
 - Analytics: Custom analytics engine
 
 ## Project Timeline
