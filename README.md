@@ -49,15 +49,14 @@ Checklist/TODOs:
 
 ### **Iteration 1 Goals**  
 
-- [ ] **Generate Platform Analytics(./user_stories/generate_platform_analytics)** | Priority: Low | Estimate: 3 days  
-- [ ] **Make a Payment(./user_stories/make_a_payment)** | Priority: Low | Estimate: 4 days  
-- [ ] **Make a Booking(./user_stories/making_a_booking)** | Priority: High | Estimate: 4 days  
-- [ ] **Manage Availability(./user_stories/manage_booking)** | Priority: High | Estimate: 5 days  
-- [ ] **Manage Providers(./user_stories/manage_providers)** | Priority: High | Estimate: 3 days  
-- [ ] **View Analytics(./user_stories/view_analytics)** | Priority: Medium | Estimate: 3 days  
+- [ ] **[Generate Platform Analytics](./user_stories/generate_platform_analytics)** | Priority: Low | Estimate: 3 days  
+- [ ] **[Make a Payment](./user_stories/make_a_payment)** | Priority: Low | Estimate: 4 days  
+- [ ] **[Make a Booking](./user_stories/making_a_booking)** | Priority: High | Estimate: 4 days  
+- [ ] **[Manage Availability](./user_stories/manage_booking)** | Priority: High | Estimate: 5 days  
+- [ ] **[Manage Providers](./user_stories/manage_providers)** | Priority: High | Estimate: 3 days  
+- [ ] **[View Analytics](./user_stories/view_analytics)** | Priority: Medium | Estimate: 3 days  
 
-**Total Estimate**: 19 days 
-
+**Total Estimate**: 19 days
 
 
 ### Iteration 2 [duration 3-4 weeks], add your start and end dates
