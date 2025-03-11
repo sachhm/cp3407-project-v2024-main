@@ -78,3 +78,9 @@ Total: YY days
 2. [Iteration-2](./iteration_2.md)
 
 
+
+# How to run the app
+* Install the npm http-server package
+* cd into the iteration1 or iteration2 folder (depending on the version you want to run)
+* Use the npm http-server command to run the application
+* Have fun!
