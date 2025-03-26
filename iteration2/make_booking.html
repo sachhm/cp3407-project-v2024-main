@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Make a Booking</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <ul>
+      <li><a href="make_booking.html">Customer Panel</a></li>
+      <li><a href="manage_availability.html">Cleaner Panel</a></li>
+      <li><a href="manage_providers.html">Admin Panel</a></li>
+      <li><a href="index.html">Home</a></li>
+    </ul>
+  </nav>
+
+  <h1>Make a Booking</h1>
+  <form id="bookingForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="service">Service:</label>
+    <input type="text" id="service" name="service" required><br>
+
+    <label for="bookingDate">Booking Date:</label>
+    <input type="date" id="bookingDate" name="booking_date" required><br>
+
+    <label for="status">Status:</label>
+    <select id="status" name="status" required>
+      <option value="light clean">Light Clean</option>
+      <option value="medium clean">Medium Clean</option>
+      <option value="deep clean">Deep Clean</option>
+    </select><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Include Supabase client library -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script type="module">
+    import { addBooking, getAllBookings } from './db.js';
+
+    document.getElementById('bookingForm').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData.entries());
+      const newBooking = await addBooking(data);
+      if (newBooking) {
+        alert('Booking created with ID: ' + newBooking.id);
+      } else {
+        alert('Error creating booking.');
+      }
+      event.target.reset();
+      displayBookings();
+    });
+
+    // Function to display all bookings
+    async function displayBookings() {
+      const bookings = await getAllBookings();
+      const bookingsDiv = document.getElementById('bookings');
+      if (bookings.length === 0) {
+        bookingsDiv.innerHTML = '<p>No bookings stored.</p>';
+        return;
+      }
+      bookingsDiv.innerHTML = '';
+      bookings.forEach(function (booking) {
+        bookingsDiv.innerHTML += `<p>ID: ${booking.id}, Name: ${booking.name}, Service: ${booking.service}, Date: ${booking.booking_date}, Status: ${booking.status}</p>`;
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      displayBookings();
+    });
+  </script>
+
+  <h2>Current Bookings</h2>
+  <div id="bookings">Loading...</div>
+
+  <footer>
+    <p>&copy; 2025 MyClean</p>
+  </footer>
+</body>
+</html>
