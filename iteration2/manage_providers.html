@@ -3,66 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manage Providers</title>
+  <title>Admin Portal - MyClean</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <nav>
-    <ul>
-      <li><a href="make_booking.html">Customer Panel</a></li>
-      <li><a href="manage_availability.html">Cleaner Panel</a></li>
-      <li><a href="manage_providers.html">Admin Panel</a></li>
-      <li><a href="index.html">Home</a></li>
-    </ul>
+    <div class="container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-broom"></i> MyClean
+      </a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="make_booking.html">Book a Cleaning</a></li>
+        <li><a href="manage_availability.html">For Cleaners</a></li>
+        <li><a href="manage_providers.html" class="active">Admin Portal</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <h1>Manage Providers</h1>
-  
-  <h2>Add New Provider</h2>
-  <form id="providerForm">
-    <label for="providerName">Name:</label>
-    <input type="text" id="providerName" name="name" required><br>
-    
-    <label for="providerEmail">Email:</label>
-    <input type="email" id="providerEmail" name="email" required><br>
-    
-    <label for="providerPhone">Phone:</label>
-    <input type="tel" id="providerPhone" name="phone" required><br>
-    
-    <label for="providerService">Service Type:</label>
-    <select id="providerService" name="service_type" required>
-      <option value="light clean">Light Clean</option>
-      <option value="medium clean">Medium Clean</option>
-      <option value="deep clean">Deep Clean</option>
-    </select><br>
-    
-    <button type="submit">Add Provider</button>
-  </form>
-  
-  <h2>Current Providers</h2>
-  <div id="providersList">Loading...</div>
+  <div class="container">
+    <h1>Admin Portal</h1>
+    <p>Manage cleaning service providers and view system statistics.</p>
 
-  <h2>Summary Statistics</h2>
-  <div id="summaryStats">Loading...</div>
+    <div class="stats-container">
+      <div class="stat-card">
+        <div id="bookings-count" class="stat-number">--</div>
+        <div class="stat-label">Total Bookings</div>
+      </div>
+      <div class="stat-card">
+        <div id="providers-count" class="stat-number">--</div>
+        <div class="stat-label">Service Providers</div>
+      </div>
+    </div>
 
-  <!-- Include Supabase client library -->
+    <div class="card">
+      <div class="card-header">
+        <h2>Add New Provider</h2>
+      </div>
+      <div class="card-body">
+        <form id="providerForm">
+          <div class="form-group">
+            <label for="providerName">Provider Name</label>
+            <input type="text" id="providerName" name="name" placeholder="Enter provider's full name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="providerEmail">Email Address</label>
+            <input type="email" id="providerEmail" name="email" placeholder="Enter provider's email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="providerPhone">Phone Number</label>
+            <input type="tel" id="providerPhone" name="phone" placeholder="Enter provider's phone number" required>
+          </div>
+
+          <div class="form-group">
+            <label for="providerService">Service Type</label>
+            <select id="providerService" name="service_type" required>
+              <option value="">-- Select service type --</option>
+              <option value="light clean">Light Clean (1-2 hours)</option>
+              <option value="medium clean">Medium Clean (3-4 hours)</option>
+              <option value="deep clean">Deep Clean (5+ hours)</option>
+            </select>
+          </div>
+
+          <button type="submit">Add Provider</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h2>Current Providers</h2>
+      </div>
+      <div class="card-body">
+        <div id="providersList">Loading...</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h3>About MyClean</h3>
+        <p>We provide professional cleaning services for homes and businesses. Our team of experienced cleaners ensures the highest quality of service.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="make_booking.html">Book a Cleaning</a></li>
+          <li><a href="manage_availability.html">For Cleaners</a></li>
+          <li><a href="manage_providers.html">Admin Portal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p>Email: info@myclean.com</p>
+        <p>Phone: (555) 123-4567</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 MyClean. All rights reserved.</p>
+    </div>
+  </footer>
+
   <script type="module">
     import { addProvider, getAllProviders, deleteProvider, getSummaryStats } from './db.js';
 
-    document.getElementById('providerForm').addEventListener('submit', async function (event) {
+    document.getElementById('providerForm').addEventListener('submit', async function(event) {
       event.preventDefault();
       const formData = new FormData(event.target);
       const data = Object.fromEntries(formData.entries());
       
+      // Show loading state
+      const submitButton = event.target.querySelector('button[type="submit"]');
+      const originalText = submitButton.textContent;
+      submitButton.textContent = 'Processing...';
+      submitButton.disabled = true;
+      
       const newProvider = await addProvider(data);
       
+      // Reset button state
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+      
       if (newProvider) {
-        alert('Provider added with ID: ' + newProvider.id);
+        alert('Provider added successfully!');
         event.target.reset();
         displayProviders();
         displaySummaryStats();
       } else {
-        alert('Error adding provider.');
+        alert('Error adding provider. Please try again.');
       }
     });
 
@@ -71,28 +144,30 @@
       const providersDiv = document.getElementById('providersList');
       
       if (providers.length === 0) {
-        providersDiv.innerHTML = '<p>No providers stored.</p>';
+        providersDiv.innerHTML = '<p>No service providers have been added yet.</p>';
         return;
       }
       
-      providersDiv.innerHTML = '<table border="1"><tr><th>ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Service Type</th><th>Actions</th></tr>';
+      let html = '';
       
-      providers.forEach(function (provider) {
-        providersDiv.innerHTML += `
-          <tr>
-            <td>${provider.id}</td>
-            <td>${provider.name}</td>
-            <td>${provider.email}</td>
-            <td>${provider.phone}</td>
-            <td>${provider.service_type}</td>
-            <td>
-              <button onclick="handleDeleteProvider('${provider.id}')">Delete</button>
-            </td>
-          </tr>
+      providers.forEach(function(provider) {
+        const statusClass = `status-${provider.service_type.split(' ')[0].toLowerCase()}`;
+        html += `
+          <div class="booking-item">
+            <div class="booking-details">
+              <h3>${provider.name}</h3>
+              <p><i class="fas fa-envelope"></i> ${provider.email}</p>
+              <p><i class="fas fa-phone"></i> ${provider.phone}</p>
+              <p class="booking-service">Specialization: <span class="booking-status ${statusClass}">${provider.service_type}</span></p>
+            </div>
+            <button onclick="handleDeleteProvider('${provider.id}')" class="delete">
+              <i class="fas fa-trash"></i> Remove
+            </button>
+          </div>
         `;
       });
       
-      providersDiv.innerHTML += '</table>';
+      providersDiv.innerHTML = html;
     }
     
     window.handleDeleteProvider = async function(id) {
@@ -110,27 +185,20 @@
 
     async function displaySummaryStats() {
       const stats = await getSummaryStats();
-      const statsDiv = document.getElementById('summaryStats');
       
       if (!stats) {
-        statsDiv.innerHTML = '<p>Error fetching summary statistics.</p>';
+        console.error('Error fetching summary statistics.');
         return;
       }
       
-      statsDiv.innerHTML = `
-        <p>Total Bookings: ${stats.totalBookings}</p>
-        <p>Total Providers: ${stats.totalProviders}</p>
-      `;
+      document.getElementById('bookings-count').textContent = stats.totalBookings;
+      document.getElementById('providers-count').textContent = stats.totalProviders;
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
       displayProviders();
       displaySummaryStats();
     });
   </script>
-
-  <footer>
-    <p>&copy; 2025 MyClean</p>
-  </footer>
 </body>
 </html>

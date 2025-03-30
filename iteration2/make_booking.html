@@ -3,39 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Make a Booking</title>
+  <title>Book a Cleaning - MyClean</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <nav>
-    <ul>
-      <li><a href="make_booking.html">Customer Panel</a></li>
-      <li><a href="manage_availability.html">Cleaner Panel</a></li>
-      <li><a href="manage_providers.html">Admin Panel</a></li>
-      <li><a href="index.html">Home</a></li>
-    </ul>
+    <div class="container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-broom"></i> MyClean
+      </a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="make_booking.html" class="active">Book a Cleaning</a></li>
+        <li><a href="manage_availability.html">For Cleaners</a></li>
+        <li><a href="manage_providers.html">Admin Portal</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <h1>Make a Booking</h1>
-  <form id="bookingForm">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required><br>
+  <div class="container">
+    <h1>Book Your Cleaning Service</h1>
+    <p>Fill out the form below to schedule your cleaning appointment. Our team will contact you to confirm your booking.</p>
 
-    <label for="service">Service:</label>
-    <input type="text" id="service" name="service" required><br>
+    <form id="bookingForm">
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+      </div>
 
-    <label for="bookingDate">Booking Date:</label>
-    <input type="date" id="bookingDate" name="booking_date" required><br>
+      <div class="form-group">
+        <label for="service">Service Needed</label>
+        <input type="text" id="service" name="service" placeholder="e.g., House Cleaning, Office Cleaning" required>
+      </div>
 
-    <label for="status">Status:</label>
-    <select id="status" name="status" required>
-      <option value="light clean">Light Clean</option>
-      <option value="medium clean">Medium Clean</option>
-      <option value="deep clean">Deep Clean</option>
-    </select><br>
+      <div class="form-group">
+        <label for="bookingDate">Preferred Date</label>
+        <input type="date" id="bookingDate" name="booking_date" required>
+      </div>
 
-    <button type="submit">Submit</button>
-  </form>
+      <div class="form-group">
+        <label for="status">Service Type</label>
+        <select id="status" name="status" required>
+          <option value="light clean">Light Clean (1-2 hours)</option>
+          <option value="medium clean">Medium Clean (3-4 hours)</option>
+          <option value="deep clean">Deep Clean (5+ hours)</option>
+        </select>
+      </div>
+
+      <button type="submit">Book Now</button>
+    </form>
+
+    <div class="card">
+      <div class="card-header">
+        <h2>Your Bookings</h2>
+      </div>
+      <div class="card-body">
+        <div id="bookings" class="booking-list">Loading...</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h3>About MyClean</h3>
+        <p>We provide professional cleaning services for homes and businesses. Our team of experienced cleaners ensures the highest quality of service.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="make_booking.html">Book a Cleaning</a></li>
+          <li><a href="manage_availability.html">For Cleaners</a></li>
+          <li><a href="manage_providers.html">Admin Portal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p>Email: info@myclean.com</p>
+        <p>Phone: (555) 123-4567</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 MyClean. All rights reserved.</p>
+    </div>
+  </footer>
 
   <!-- Include Supabase client library -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
@@ -46,12 +99,25 @@
       event.preventDefault();
       const formData = new FormData(event.target);
       const data = Object.fromEntries(formData.entries());
+      
+      // Show loading state
+      const submitButton = event.target.querySelector('button[type="submit"]');
+      const originalText = submitButton.textContent;
+      submitButton.textContent = 'Processing...';
+      submitButton.disabled = true;
+      
       const newBooking = await addBooking(data);
+      
+      // Reset button state
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+      
       if (newBooking) {
-        alert('Booking created with ID: ' + newBooking.id);
+        alert('Your booking has been created successfully!');
       } else {
-        alert('Error creating booking.');
+        alert('Error creating booking. Please try again.');
       }
+      
       event.target.reset();
       displayBookings();
     });
@@ -60,13 +126,25 @@
     async function displayBookings() {
       const bookings = await getAllBookings();
       const bookingsDiv = document.getElementById('bookings');
+      
       if (bookings.length === 0) {
-        bookingsDiv.innerHTML = '<p>No bookings stored.</p>';
+        bookingsDiv.innerHTML = '<p>You don\'t have any bookings yet.</p>';
         return;
       }
+      
       bookingsDiv.innerHTML = '';
       bookings.forEach(function (booking) {
-        bookingsDiv.innerHTML += `<p>ID: ${booking.id}, Name: ${booking.name}, Service: ${booking.service}, Date: ${booking.booking_date}, Status: ${booking.status}</p>`;
+        const statusClass = `status-${booking.status.split(' ')[0].toLowerCase()}`;
+        bookingsDiv.innerHTML += `
+          <div class="booking-item">
+            <div class="booking-details">
+              <h3>${booking.name}</h3>
+              <p class="booking-service">${booking.service}</p>
+              <p class="booking-date">Date: ${new Date(booking.booking_date).toLocaleDateString()}</p>
+            </div>
+            <span class="booking-status ${statusClass}">${booking.status}</span>
+          </div>
+        `;
       });
     }
 
@@ -74,12 +152,5 @@
       displayBookings();
     });
   </script>
-
-  <h2>Current Bookings</h2>
-  <div id="bookings">Loading...</div>
-
-  <footer>
-    <p>&copy; 2025 MyClean</p>
-  </footer>
 </body>
 </html>

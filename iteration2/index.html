@@ -4,22 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home - MyClean</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <nav>
-    <ul>
-      <li><a href="make_booking.html">Customer Panel</a></li>
-      <li><a href="manage_availability.html">Cleaner Panel</a></li>
-      <li><a href="manage_providers.html">Admin Panel</a></li>
-      <li><a href="index.html">Home</a></li>
-    </ul>
+    <div class="container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-broom"></i> MyClean
+      </a>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="make_booking.html">Book a Cleaning</a></li>
+        <li><a href="manage_availability.html">For Cleaners</a></li>
+        <li><a href="manage_providers.html">Admin Portal</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <h1>Welcome to MyClean</h1>
+  <div class="container">
+    <h1>Welcome to MyClean</h1>
+    <p>Your trusted partner for professional cleaning services. Book a cleaning, manage your schedule, or join our team of cleaners.</p>
 
-  <h2>Bookings</h2>
-  <div id="bookings">Loading...</div>
+    <div class="card">
+      <div class="card-header">
+        <h2>Current Bookings</h2>
+      </div>
+      <div class="card-body">
+        <div id="bookings" class="booking-list">Loading...</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div>
+        <h3>About MyClean</h3>
+        <p>We provide professional cleaning services for homes and businesses. Our team of experienced cleaners ensures the highest quality of service.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="make_booking.html">Book a Cleaning</a></li>
+          <li><a href="manage_availability.html">For Cleaners</a></li>
+          <li><a href="manage_providers.html">Admin Portal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p>Email: info@myclean.com</p>
+        <p>Phone: (555) 123-4567</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 MyClean. All rights reserved.</p>
+    </div>
+  </footer>
 
   <!-- Load Supabase & Custom JS File -->
   <script type="module">
@@ -29,12 +70,22 @@
       const bookings = await getAllBookings();
       const bookingsDiv = document.getElementById('bookings');
       if (bookings.length === 0) {
-        bookingsDiv.innerHTML = '<p>No bookings stored.</p>';
+        bookingsDiv.innerHTML = '<p>No bookings available at the moment.</p>';
         return;
       }
       bookingsDiv.innerHTML = '';
       bookings.forEach(function (booking) {
-        bookingsDiv.innerHTML += `<p>ID: ${booking.id}, Name: ${booking.name}, Service: ${booking.service}, Date: ${booking.booking_date}, Status: ${booking.status}</p>`;
+        const statusClass = `status-${booking.status.split(' ')[0].toLowerCase()}`;
+        bookingsDiv.innerHTML += `
+          <div class="booking-item">
+            <div class="booking-details">
+              <h3>${booking.name}</h3>
+              <p class="booking-service">${booking.service}</p>
+              <p class="booking-date">Date: ${new Date(booking.booking_date).toLocaleDateString()}</p>
+            </div>
+            <span class="booking-status ${statusClass}">${booking.status}</span>
+          </div>
+        `;
       });
     }
 
@@ -42,9 +93,5 @@
       displayBookings();
     });
   </script>
-
-  <footer>
-    <p>&copy; 2025 MyClean</p>
-  </footer>
 </body>
 </html>

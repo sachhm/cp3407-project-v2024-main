@@ -3,109 +3,224 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cleaner Availability</title>
+  <title>Cleaner Availability - MyClean</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <nav>
-    <ul>
-      <li><a href="make_booking.html">Customer Panel</a></li>
-      <li><a href="manage_availability.html">Cleaner Panel</a></li>
-      <li><a href="manage_providers.html">Admin Panel</a></li>
-      <li><a href="index.html">Home</a></li>
-    </ul>
+    <div class="container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-broom"></i> MyClean
+      </a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="make_booking.html">Book a Cleaning</a></li>
+        <li><a href="manage_availability.html" class="active">For Cleaners</a></li>
+        <li><a href="manage_providers.html">Admin Portal</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <h1>Set Your Availability</h1>
-  <form id="availabilityForm">
-    <label for="cleanerName">Name:</label>
-    <input type="text" id="cleanerName" name="cleaner_name" required><br>
+  <div class="container">
+    <h1>Set Your Availability</h1>
+    <p>Let us know when you're available to work. This helps us match you with customers who need cleaning services on those dates.</p>
 
-    <label>Available Dates:</label>
-    <div id="dateContainer">
-      <input type="date" class="available-date">
+    <form id="availabilityForm">
+      <div class="form-group">
+        <label for="cleanerName">Your Name</label>
+        <input type="text" id="cleanerName" name="cleaner_name" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label>Available Dates</label>
+        <div id="dateContainer" class="date-container">
+          <div class="date-item">
+            <input type="date" class="available-date" required>
+          </div>
+        </div>
+        <button type="button" id="addDate" class="add">Add Another Date</button>
+      </div>
+
+      <button type="submit">Submit Availability</button>
+    </form>
+
+    <div class="card">
+      <div class="card-header">
+        <h2>Your Current Availability</h2>
+      </div>
+      <div class="card-body">
+        <div id="availabilityList">Loading...</div>
+      </div>
     </div>
-    <button type="button" id="addDate">Add Another Date</button><br>
-
-    <button type="submit">Submit</button>
-  </form>
-
-  <h2>Current Available Dates</h2>
-  <div id="availabilityList">Loading...</div>
-
-  <!-- Include Supabase client library -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-  <script type="module">
-    import { addAvailability, getAllAvailability } from './db.js';
-
-    // Add a new date input field
-    document.getElementById('addDate').addEventListener('click', function () {
-      const dateContainer = document.getElementById('dateContainer');
-      const newDateInput = document.createElement('input');
-      newDateInput.type = 'date';
-      newDateInput.classList.add('available-date');
-
-      const removeBtn = document.createElement('button');
-      removeBtn.textContent = 'Remove';
-      removeBtn.type = 'button';
-      removeBtn.onclick = function () {
-        dateContainer.removeChild(newDateInput);
-        dateContainer.removeChild(removeBtn);
-      };
-
-      dateContainer.appendChild(newDateInput);
-      dateContainer.appendChild(removeBtn);
-    });
-
-    // On form submit, insert availability info into Supabase
-    document.getElementById('availabilityForm').addEventListener('submit', async function (event) {
-      event.preventDefault();
-      const formData = new FormData(event.target);
-      const cleanerName = formData.get('cleaner_name');
-      const dateInputs = document.querySelectorAll('.available-date');
-      const availableDates = Array.from(dateInputs).map(input => input.value).filter(date => date);
-      
-      if (availableDates.length === 0) {
-        alert('Please select at least one available date.');
-        return;
-      }
-      
-      const availabilityData = {
-        cleaner_name: cleanerName,
-        available_dates: availableDates
-      };
-      
-      const newAvailability = await addAvailability(availabilityData);
-      
-      if (newAvailability) {
-        alert('Availability submitted with ID: ' + newAvailability.id);
-        event.target.reset();
-        displayAvailability();
-      } else {
-        alert('Error submitting availability.');
-      }
-    });
-
-    async function displayAvailability() {
-      const availabilityData = await getAllAvailability();
-      const availabilityList = document.getElementById('availabilityList');
-      
-      if (availabilityData.length === 0) {
-        availabilityList.innerHTML = '<p>No availability data stored.</p>';
-        return;
-      }
-      
-      availabilityList.innerHTML = '';
-      availabilityData.forEach((avail) => {
-        availabilityList.innerHTML += `<p>ID: ${avail.id}, Name: ${avail.cleaner_name}, Dates: ${Array.isArray(avail.available_dates) ? avail.available_dates.join(', ') : avail.available_dates}</p>`;
-      });
-    }
-    
-    document.addEventListener('DOMContentLoaded', displayAvailability);
-  </script>
+  </div>
 
   <footer>
-    <p>&copy; 2025 MyClean</p>
+    <div class="container">
+      <div>
+        <h3>About MyClean</h3>
+        <p>We provide professional cleaning services for homes and businesses. Our team of experienced cleaners ensures the highest quality of service.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="make_booking.html">Book a Cleaning</a></li>
+          <li><a href="manage_availability.html">For Cleaners</a></li>
+          <li><a href="manage_providers.html">Admin Portal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Contact Us</h3>
+        <p>Email: info@myclean.com</p>
+        <p>Phone: (555) 123-4567</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 MyClean. All rights reserved.</p>
+    </div>
   </footer>
+
+  <!-- Load Supabase & Custom JS File -->
+  <script type="module">
+    import { addAvailability, getAllAvailability, deleteAvailability } from './db.js';
+
+    // Function to add a new date input field
+    document.getElementById('addDate').addEventListener('click', function() {
+      const dateContainer = document.getElementById('dateContainer');
+      const dateItem = document.createElement('div');
+      dateItem.className = 'date-item';
+      
+      const dateInput = document.createElement('input');
+      dateInput.type = 'date';
+      dateInput.className = 'available-date';
+      dateInput.required = true;
+      
+      const removeButton = document.createElement('button');
+      removeButton.type = 'button';
+      removeButton.className = 'remove-date';
+      removeButton.innerHTML = '×';
+      removeButton.addEventListener('click', function() {
+        dateContainer.removeChild(dateItem);
+      });
+      
+      dateItem.appendChild(dateInput);
+      dateItem.appendChild(removeButton);
+      dateContainer.appendChild(dateItem);
+    });
+
+    // Function to handle form submission
+    document.getElementById('availabilityForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      
+      const cleanerName = document.getElementById('cleanerName').value;
+      const dateInputs = document.querySelectorAll('.available-date');
+      
+      // Show loading state
+      const submitButton = event.target.querySelector('button[type="submit"]');
+      const originalText = submitButton.textContent;
+      submitButton.textContent = 'Processing...';
+      submitButton.disabled = true;
+      
+      // Add each date as a separate availability entry
+      let successCount = 0;
+      for (const dateInput of dateInputs) {
+        if (dateInput.value) {
+          const availabilityData = {
+            cleaner_name: cleanerName,
+            available_date: dateInput.value
+          };
+          
+          const result = await addAvailability(availabilityData);
+          if (result) successCount++;
+        }
+      }
+      
+      // Reset button state
+      submitButton.textContent = originalText;
+      submitButton.disabled = false;
+      
+      if (successCount > 0) {
+        alert(`Successfully added ${successCount} availability dates.`);
+        event.target.reset();
+        // Reset to only one date input
+        const dateContainer = document.getElementById('dateContainer');
+        dateContainer.innerHTML = `
+          <div class="date-item">
+            <input type="date" class="available-date" required>
+          </div>
+        `;
+        displayAvailability();
+      } else {
+        alert('Error adding availability. Please try again.');
+      }
+    });
+
+    // Function to display all availability
+    async function displayAvailability() {
+      const availabilityList = await getAllAvailability();
+      const availabilityDiv = document.getElementById('availabilityList');
+      
+      if (availabilityList.length === 0) {
+        availabilityDiv.innerHTML = '<p>You haven\'t set any availability yet.</p>';
+        return;
+      }
+      
+      // Group availability by cleaner name
+      const groupedAvailability = {};
+      availabilityList.forEach(item => {
+        if (!groupedAvailability[item.cleaner_name]) {
+          groupedAvailability[item.cleaner_name] = [];
+        }
+        groupedAvailability[item.cleaner_name].push(item);
+      });
+      
+      let html = '';
+      for (const [cleanerName, dates] of Object.entries(groupedAvailability)) {
+        html += `
+          <div class="booking-item">
+            <div class="booking-details">
+              <h3>${cleanerName}</h3>
+              <p>Available dates:</p>
+              <ul>
+        `;
+        
+        dates.forEach(date => {
+          const formattedDate = new Date(date.available_date).toLocaleDateString();
+          html += `
+            <li>
+              ${formattedDate}
+              <button onclick="handleDeleteAvailability('${date.id}')" class="delete" style="padding: 0.25rem 0.5rem; margin-left: 0.5rem;">Remove</button>
+            </li>
+          `;
+        });
+        
+        html += `
+              </ul>
+            </div>
+          </div>
+        `;
+      }
+      
+      availabilityDiv.innerHTML = html;
+    }
+    
+    // Function to delete availability
+    window.handleDeleteAvailability = async function(id) {
+      if (confirm('Are you sure you want to remove this availability date?')) {
+        const success = await deleteAvailability(id);
+        if (success) {
+          alert('Availability removed successfully');
+          displayAvailability();
+        } else {
+          alert('Error removing availability.');
+        }
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+      displayAvailability();
+    });
+  </script>
 </body>
 </html>
