@@ -10,15 +10,24 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Function to add a new booking
 async function addBooking(bookingData) {
+  // Ensure active is set to true for new bookings
+  const bookingWithActive = {
+    ...bookingData,
+    active: true
+  };
+
+  console.log('Booking data being inserted:', bookingWithActive);
+
   const { data, error } = await supabase
     .from('bookings')
-    .insert([bookingData])
+    .insert([bookingWithActive])
     .select();
 
   if (error) {
     console.error('Error adding booking:', error);
     return null;
   }
+
   return data[0];
 }
 
@@ -153,7 +162,6 @@ async function deleteAvailability(availabilityId) {
 }
 
 ///// --- SUMMARY STATISTICS --- /////
-
 // Function to get summary statistics
 async function getSummaryStats() {
   const { data: bookings, error: bookingsError } = await supabase
@@ -164,20 +172,40 @@ async function getSummaryStats() {
     .from('providers')
     .select('id');
 
-  if (bookingsError || providersError) {
-    console.error('Error fetching summary statistics:', bookingsError || providersError);
-    return null;
-  }
+  const { data: activeBookings, error: activeError } = await supabase
+    .from('bookings')
+    .select('id')
+    .eq('active', true);  // ✅ Filtering for active bookings
+
+  console.log("Bookings Data:", bookings, bookingsError);
+  console.log("Providers Data:", providers, providersError);
+  console.log("Active Bookings Data:", activeBookings, activeError);  // ✅ Check this log
 
   return {
-    totalBookings: bookings.length,
-    totalProviders: providers.length
+    totalBookings: bookings ? bookings.length : 0,
+    totalProviders: providers ? providers.length : 0,
+    totalActiveBookings: activeBookings ? activeBookings.length : 0, // ✅ Ensure this exists
   };
 }
 
-// Export all functions
+
+async function updateBookingActive(bookingId, active) {
+  const { data, error } = await supabase
+    .from('bookings')
+    .update({ active: active })
+    .eq('id', bookingId)
+    .select();
+
+  if (error) {
+    console.error('Error updating booking:', error);
+    return null;
+  }
+  return data[0];
+}
+
+// Update exports at the bottom of db.js
 export { 
-  addBooking, getAllBookings, deleteBooking,
+  addBooking, getAllBookings, deleteBooking, updateBookingActive,
   addProvider, getAllProviders, deleteProvider,
   addAvailability, getAllAvailability, deleteAvailability,
   getSummaryStats

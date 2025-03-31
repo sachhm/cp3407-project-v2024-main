@@ -434,3 +434,20 @@ footer .copyright {
     padding: 1.5rem;
   }
 }
+
+/* Add this to your style.css file */
+button.complete {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+button.complete:hover {
+  background-color: #218838;
+} 
