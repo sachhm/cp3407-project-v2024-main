@@ -128,7 +128,7 @@
         if (dateInput.value) {
           const availabilityData = {
             cleaner_name: cleanerName,
-            available_date: dateInput.value
+            available_dates: [dateInput.value] // Store as an array
           };
           
           const result = await addAvailability(availabilityData);
@@ -186,7 +186,7 @@
         `;
         
         dates.forEach(date => {
-          const formattedDate = new Date(date.available_date).toLocaleDateString();
+          const formattedDate = formatDate(date);  // Use the helper to format the date
           html += `
             <li>
               ${formattedDate}
@@ -203,6 +203,16 @@
       }
       
       availabilityDiv.innerHTML = html;
+    }
+
+    // Helper function to format the date
+    function formatDate(availability) {
+      if (availability.available_dates && availability.available_dates.length > 0) {
+        const dateStr = availability.available_dates[0]; // Extract first date from the array
+        const formattedDate = new Date(dateStr).toLocaleDateString(); // Convert & format
+        return formattedDate;
+      }
+      return "No date available";
     }
     
     // Function to delete availability

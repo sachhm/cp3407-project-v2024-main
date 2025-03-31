@@ -45,13 +45,17 @@
       <div class="form-group">
         <label for="status">Service Type</label>
         <select id="status" name="status" required>
+          <option value="--">--</option>
           <option value="light clean">Light Clean (1-2 hours)</option>
           <option value="medium clean">Medium Clean (3-4 hours)</option>
           <option value="deep clean">Deep Clean (5+ hours)</option>
         </select>
       </div>
 
-      <button type="submit">Book Now</button>
+      <!-- Combined Button Section -->
+      <div class="form-group">
+        <button type="submit" id="submitButton">Book and Pay Now</button>
+      </div>
     </form>
 
     <div class="card">
@@ -99,25 +103,38 @@
       event.preventDefault();
       const formData = new FormData(event.target);
       const data = Object.fromEntries(formData.entries());
-      
+
       // Show loading state
       const submitButton = event.target.querySelector('button[type="submit"]');
       const originalText = submitButton.textContent;
       submitButton.textContent = 'Processing...';
       submitButton.disabled = true;
-      
+
       const newBooking = await addBooking(data);
-      
+
       // Reset button state
       submitButton.textContent = originalText;
       submitButton.disabled = false;
-      
+
       if (newBooking) {
         alert('Your booking has been created successfully!');
       } else {
         alert('Error creating booking. Please try again.');
       }
-      
+
+      // Determine the payment link based on selected service type
+      const service = data.status;
+      let stripeLink = 'https://buy.stripe.com/test_8wMg0J5ln8WndHi3cc';  // Default for Light Clean
+
+      if (service === 'medium clean') {
+        stripeLink = 'https://buy.stripe.com/test_cN215P9BDb4v0Uw145';  // Update for Medium Clean
+      } else if (service === 'deep clean') {
+        stripeLink = 'https://buy.stripe.com/test_eVadSBcNPegH8mY146';  // Update for Deep Clean
+      }
+
+      // Redirect to the appropriate Stripe payment link
+      window.location.href = stripeLink;
+
       event.target.reset();
       displayBookings();
     });
@@ -126,12 +143,12 @@
     async function displayBookings() {
       const bookings = await getAllBookings();
       const bookingsDiv = document.getElementById('bookings');
-      
+
       if (bookings.length === 0) {
         bookingsDiv.innerHTML = '<p>You don\'t have any bookings yet.</p>';
         return;
       }
-      
+
       bookingsDiv.innerHTML = '';
       bookings.forEach(function (booking) {
         const statusClass = `status-${booking.status.split(' ')[0].toLowerCase()}`;

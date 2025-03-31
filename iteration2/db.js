@@ -3,7 +3,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 // Initialize Supabase client
 const supabaseUrl = 'https://mgbekoeqtysnuoshxwup.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1nYmVrb2VxdHlzbnVvc2h4d3VwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NDA0NDAsImV4cCI6MjA1NjIxNjQ0MH0.6V8KdhJl_ySCe1ti0OQj5NeiG92tOvF0Egc6f03fFn0'; // Replace with your actual key
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1nYmVrb2VxdHlzbnVvc2h4d3VwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA2NDA0NDAsImV4cCI6MjA1NjIxNjQ0MH0.6V8KdhJl_ySCe1ti0OQj5NeiG92tOvF0Egc6f03fFn0';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 ///// --- BOOKING MANAGEMENT --- /////
@@ -96,6 +96,11 @@ async function deleteProvider(providerId) {
 
 // Function to add a new cleaner availability
 async function addAvailability(availabilityData) {
+  // Ensure date is saved in YYYY-MM-DD format
+  availabilityData.available_dates = availabilityData.available_dates.map(date =>
+    new Date(date).toISOString().split('T')[0]
+  );
+
   const { data, error } = await supabase
     .from('availability')
     .insert([availabilityData])
@@ -118,7 +123,19 @@ async function getAllAvailability() {
     console.error('Error fetching availability:', error);
     return [];
   }
-  return data;
+
+  // Format dates for display
+  return data.map(item => ({
+    ...item,
+    available_dates: item.available_dates.map(date => {
+      const formattedDate = new Date(date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      return formattedDate;
+    })
+  }));
 }
 
 // Function to delete availability
