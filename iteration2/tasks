@@ -1,14 +1,19 @@
 # Project Progress Tracking
 
 Platform Analytics Reports For Admins: DOING
-
-UI Overhaul: DONE (To Review)
+- Added some basic analytics numbers -> Should be good? 
 - Sachh
 
-Add Payment Methods: TODO
+UI Overhaul: DOING
+- Just need to modify manage_availability to look better and change home page to show current bookings instead of all bookings
+- Sachh
+
+Add Payment Methods: DOING
+- To refine
 - Jason
 
 Database/Booking Logic: DOING (99% COMPLETE)
+- Jason
 
 Add Accounts for Users: TODO
 
