@@ -1,0 +1,23 @@
+{
+  "name": "iteration2",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "db.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.1.0"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.49.4"
+  }
+}
