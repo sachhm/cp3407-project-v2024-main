@@ -14,6 +14,12 @@ MyClean is a comprehensive platform that connects cleaning service providers wit
 - Advanced analytics dashboard
 - Provider management portal
 
+## Technical Stack
+- Frontend: React.js with Material-UI
+- Backend: Node.js with Supabase
+- Database: PostgreSQL (via Supabase)
+- Analytics: Custom analytics engine
+
 ## Project Timeline
 ### Iteration 1 (Feb 15 - March 7, 2024)
 Focus: Core Booking System & Provider Management
