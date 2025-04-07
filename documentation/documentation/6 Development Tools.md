@@ -150,14 +150,14 @@ module.exports = {
 ### Local Development
 1. Clone repository:
    ```bash
-   git clone https://github.com/username/myclean.git
-   cd myclean
+   git clone https://github.com/sachhm/cp3407-project-v2024-main.git
+   cd cp3407-project-v2024-main
    ```
 
 2. Start development server:
    ```bash
    cd iteration2
-   http-server -p 8080
+   http-server
    ```
 
 ### Deployment Process
@@ -165,15 +165,12 @@ module.exports = {
    ```bash
    # Run tests
    npm test
-   
-   # Build production assets
-   npm run build
    ```
 
 2. Deploy to production:
    ```bash
    # Deploy to AWS
-   ./deploy.sh production
+   # Currently manually deployed. 
    ```
 
 ## Tool Selection Justification

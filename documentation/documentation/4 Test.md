@@ -178,19 +178,7 @@ Analytics            PASS      Data accuracy verified
 ## Automated Testing Pipeline
 
 ### CI/CD Integration
-```yaml
-name: Test Suite
-on: [push, pull_request]
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run Tests
-        run: |
-          npm install
-          npm test
-```
+We haven't currently integrated CI/CD
 
 ## Test-Driven Development Examples
 
