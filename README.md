@@ -14,11 +14,6 @@ MyClean is a comprehensive platform that connects cleaning service providers wit
 - Advanced analytics dashboard
 - Provider management portal
 
-## Technical Stack
-- Frontend: React.js with Material-UI
-- Backend: Node.js with Supabase
-- Database: PostgreSQL (via Supabase)
-- Analytics: Custom analytics engine
 
 ## Project Timeline
 ### Iteration 1 (Feb 15 - March 7, 2024)
@@ -75,11 +70,3 @@ Total: YY days
 # Actual iterations
 1. [Iteration-1](./iteration_1.md)
 2. [Iteration-2](./iteration_2.md)
-
-
-
-# How to run the app
-* Install the npm http-server package
-* cd into the iteration1 or iteration2 folder (depending on the version you want to run)
-* Use the npm http-server command to run the application
-* Have fun!
