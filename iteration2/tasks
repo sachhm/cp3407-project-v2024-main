@@ -8,11 +8,10 @@ UI Overhaul: DOING
 - Just need to modify manage_availability to look better and change home page to show current bookings instead of all bookings
 - Sachh
 
-Add Payment Methods: DOING
-- To refine
+Add Payment Methods: DONE
 - Jason
 
-Database/Booking Logic: DOING (99% COMPLETE)
+Database/Booking Logic: DONE
 - Jason
 
 Add Accounts for Users: TODO
