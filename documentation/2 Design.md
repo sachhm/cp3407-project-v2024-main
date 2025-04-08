@@ -124,6 +124,9 @@ erDiagram
        Validation->>+Database: Save
    ```
 
+### Mockup Wireframe
+- Ninjamock: https://ninjamock.com/s/H16S5Lx
+
 ### Responsive Design
 - Mobile-first approach
 - Breakpoints at 768px and 1024px
