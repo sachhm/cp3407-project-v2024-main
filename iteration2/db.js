@@ -203,7 +203,178 @@ async function updateBookingActive(bookingId, active) {
   return data[0];
 }
 
-// Update exports at the bottom of db.js
+// Helper functions for validation
+function validateBooking(bookingData) {
+  // Check required fields
+  if (!bookingData.name || !bookingData.service || !bookingData.booking_date) {
+    return false;
+  }
+  
+  // Check if booking date is in the future
+  const bookingDate = new Date(bookingData.booking_date);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  
+  return bookingDate >= today;
+}
+
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+// Update the database functions
+async function addBooking(bookingData) {
+  // Validate booking data
+  if (!validateBooking(bookingData)) {
+    console.error('Invalid booking data');
+    return null;
+  }
+
+  const bookingWithActive = {
+    ...bookingData,
+    active: true,
+    status: bookingData.status || 'Pending'
+  };
+
+  const { data, error } = await supabase
+    .from('bookings')
+    .insert([bookingWithActive])
+    .select();
+
+  if (error) {
+    console.error('Error adding booking:', error);
+    return null;
+  }
+
+  return data[0];
+}
+
+async function addProvider(providerData) {
+  // Validate email
+  if (!validateEmail(providerData.email)) {
+    console.error('Invalid email format');
+    return null;
+  }
+
+  // Check for existing provider with same email
+  const { data: existingProvider } = await supabase
+    .from('providers')
+    .select('email')
+    .eq('email', providerData.email);
+
+  if (existingProvider && existingProvider.length > 0) {
+    console.error('Provider with this email already exists');
+    return null;
+  }
+
+  const { data, error } = await supabase
+    .from('providers')
+    .insert([providerData])
+    .select();
+
+  if (error) {
+    console.error('Error adding provider:', error);
+    return null;
+  }
+
+  return data[0];
+}
+
+async function addAvailability(availabilityData) {
+  // Validate dates are in the future
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  const validDates = availabilityData.available_dates.every(date => {
+    const availableDate = new Date(date);
+    return availableDate >= today;
+  });
+
+  if (!validDates) {
+    console.error('Cannot set availability for past dates');
+    return null;
+  }
+
+  // Check for overlapping availability
+  const { data: existingAvailability } = await supabase
+    .from('availability')
+    .select('*')
+    .eq('cleaner_name', availabilityData.cleaner_name);
+
+  const hasOverlap = existingAvailability?.some(existing => 
+    existing.available_dates.some(date => 
+      availabilityData.available_dates.includes(date)
+    )
+  );
+
+  if (hasOverlap) {
+    console.error('Overlapping availability detected');
+    return null;
+  }
+
+  const { data, error } = await supabase
+    .from('availability')
+    .insert([availabilityData])
+    .select();
+
+  if (error) {
+    console.error('Error adding availability:', error);
+    return null;
+  }
+
+  return data[0];
+}
+
+async function updateBookingActive(bookingId, active) {
+  // Get current booking status
+  const { data: currentBooking } = await supabase
+    .from('bookings')
+    .select('status')
+    .eq('id', bookingId)
+    .single();
+
+  // Prevent status change if already completed
+  if (currentBooking?.status === 'Completed' && !active) {
+    console.error('Cannot modify completed booking');
+    return null;
+  }
+
+  const { data, error } = await supabase
+    .from('bookings')
+    .update({ active: active })
+    .eq('id', bookingId)
+    .select();
+
+  if (error) {
+    console.error('Error updating booking:', error);
+    return null;
+  }
+
+  return data[0];
+}
+
+async function getSummaryStats() {
+  const { data: bookings } = await supabase
+    .from('bookings')
+    .select('id, active');
+
+  const { data: providers } = await supabase
+    .from('providers')
+    .select('id');
+
+  const totalBookings = bookings?.length || 0;
+  const totalProviders = providers?.length || 0;
+  const totalActiveBookings = bookings?.filter(b => b.active)?.length || 0;
+
+  // Ensure active bookings never exceed total bookings
+  return {
+    totalBookings,
+    totalProviders,
+    totalActiveBookings: Math.min(totalActiveBookings, totalBookings)
+  };
+}
+
 export { 
   addBooking, getAllBookings, deleteBooking, updateBookingActive,
   addProvider, getAllProviders, deleteProvider,
