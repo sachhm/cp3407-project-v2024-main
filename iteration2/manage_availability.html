@@ -181,22 +181,23 @@
           <div class="booking-item">
             <div class="booking-details">
               <h3>${cleanerName}</h3>
-              <p>Available dates:</p>
-              <ul>
+              <div class="date-badges">
         `;
         
         dates.forEach(date => {
-          const formattedDate = formatDate(date);  // Use the helper to format the date
+          const formattedDate = formatDate(date);
           html += `
-            <li>
-              ${formattedDate}
-              <button onclick="handleDeleteAvailability('${date.id}')" class="delete" style="padding: 0.25rem 0.5rem; margin-left: 0.5rem;">Remove</button>
-            </li>
+            <div class="date-badge">
+              <span class="booking-status status-light">${formattedDate}</span>
+              <button onclick="handleDeleteAvailability('${date.id}')" class="delete-badge" title="Remove date">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
           `;
         });
         
         html += `
-              </ul>
+              </div>
             </div>
           </div>
         `;
@@ -208,9 +209,13 @@
     // Helper function to format the date
     function formatDate(availability) {
       if (availability.available_dates && availability.available_dates.length > 0) {
-        const dateStr = availability.available_dates[0]; // Extract first date from the array
-        const formattedDate = new Date(dateStr).toLocaleDateString(); // Convert & format
-        return formattedDate;
+        const dateStr = availability.available_dates[0];
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('en-US', {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric'
+        });
       }
       return "No date available";
     }

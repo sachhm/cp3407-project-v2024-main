@@ -88,14 +88,14 @@
       </div>
     </div>
 
-  <div class="card">
-    <div class="card-header">
-      <h2>Active Bookings</h2>
+    <div class="card">
+      <div class="card-header">
+        <h2>All Bookings</h2>
+      </div>
+      <div class="card-body">
+        <div id="bookings" class="booking-list">Loading...</div>
+      </div>
     </div>
-    <div class="card-body">
-      <div id="activeBookingsList">Loading...</div>
-    </div>
-  </div>
   
 </div>
 
@@ -201,62 +201,62 @@
     };
 
     async function displaySummaryStats() {
-  const stats = await getSummaryStats();
+      const stats = await getSummaryStats();
 
-  if (!stats) {
-    console.error('Error fetching summary statistics.');
-    return;
-  }
+      if (!stats) {
+        console.error('Error fetching summary statistics.');
+        return;
+      }
 
-  console.log("Summary Stats:", stats); // ✅ Check what's being returned
+      console.log("Summary Stats:", stats);
 
-  document.getElementById('bookings-count').textContent = stats.totalBookings;
-  document.getElementById('providers-count').textContent = stats.totalProviders;
-  document.getElementById('active-bookings-count').textContent = stats.totalActiveBookings;
-}
+      document.getElementById('bookings-count').textContent = stats.totalBookings;
+      document.getElementById('providers-count').textContent = stats.totalProviders;
+      document.getElementById('active-bookings-count').textContent = stats.totalActiveBookings;
+    }
 
-
-    async function displayActiveBookings() {
+    async function displayAllBookings() {
       const bookings = await getAllBookings();
-      const activeBookingsDiv = document.getElementById('activeBookingsList');
+      const bookingsDiv = document.getElementById('bookings');
 
-      // Filter only active bookings
-      const activeBookings = bookings.filter(booking => booking.active === true);
-
-      if (activeBookings.length === 0) {
-        activeBookingsDiv.innerHTML = '<p>No active bookings at the moment.</p>';
+      if (bookings.length === 0) {
+        bookingsDiv.innerHTML = '<p>No bookings available.</p>';
         return;
       }
 
       let html = '';
-
-      activeBookings.forEach(function (booking) {
+      bookings.forEach(function (booking) {
         const statusClass = `status-${booking.status.split(' ')[0].toLowerCase()}`;
+        const activeClass = booking.active ? 'status-active' : 'status-inactive';
         html += `
-        <div class="booking-item">
-          <div class="booking-details">
-            <h3>${booking.name}</h3>
-            <p class="booking-service">${booking.service}</p>
-            <p class="booking-date">Date: ${new Date(booking.booking_date).toLocaleDateString()}</p>
-            <span class="booking-status ${statusClass}">${booking.status}</span>
+          <div class="booking-item">
+            <div class="booking-details">
+              <h3>${booking.name}</h3>
+              <p class="booking-service">${booking.service}</p>
+              <p class="booking-date">Date: ${new Date(booking.booking_date).toLocaleDateString()}</p>
+              <div class="booking-badges">
+                <span class="booking-status ${statusClass}">${booking.status}</span>
+                <span class="booking-status ${activeClass}">${booking.active ? 'Active' : 'Completed'}</span>
+              </div>
+            </div>
+            ${booking.active ? `
+              <button onclick="handleCompleteBooking('${booking.id}')" class="complete">
+                <i class="fas fa-check"></i> Mark as Completed
+              </button>
+            ` : ''}
           </div>
-          <button onclick="handleCompleteBooking('${booking.id}')" class="complete">
-            <i class="fas fa-check"></i> Mark as Completed
-          </button>
-        </div>
-      `;
+        `;
       });
 
-      activeBookingsDiv.innerHTML = html;
+      bookingsDiv.innerHTML = html;
     }
 
-    // Add this function to handle the "Complete" button click
     window.handleCompleteBooking = async function (id) {
       if (confirm('Are you sure you want to mark this booking as completed?')) {
         const updatedBooking = await updateBookingActive(id, false);
         if (updatedBooking) {
           alert('Booking marked as completed successfully');
-          displayActiveBookings();
+          displayAllBookings();
           displaySummaryStats();
         } else {
           alert('Error updating booking status.');
@@ -267,7 +267,7 @@
     document.addEventListener('DOMContentLoaded', function () {
       displayProviders();
       displaySummaryStats();
-      displayActiveBookings(); // Add this line
+      displayAllBookings();
     });
   </script>
 </body>

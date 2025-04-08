@@ -28,10 +28,10 @@
 
     <div class="card">
       <div class="card-header">
-        <h2>Current Bookings</h2>
+        <h2>Active Bookings</h2>
       </div>
       <div class="card-body">
-        <div id="bookings" class="booking-list">Loading...</div>
+        <div id="activeBookingsList" class="booking-list">Loading...</div>
       </div>
     </div>
   </div>
@@ -66,31 +66,38 @@
   <script type="module">
     import { getAllBookings } from './db.js';
 
-    async function displayBookings() {
+    async function displayActiveBookings() {
       const bookings = await getAllBookings();
-      const bookingsDiv = document.getElementById('bookings');
-      if (bookings.length === 0) {
-        bookingsDiv.innerHTML = '<p>No bookings available at the moment.</p>';
+      const activeBookingsDiv = document.getElementById('activeBookingsList');
+
+      // Filter only active bookings
+      const activeBookings = bookings.filter(booking => booking.active === true);
+
+      if (activeBookings.length === 0) {
+        activeBookingsDiv.innerHTML = '<p>No active bookings at the moment.</p>';
         return;
       }
-      bookingsDiv.innerHTML = '';
-      bookings.forEach(function (booking) {
+
+      let html = '';
+      activeBookings.forEach(function (booking) {
         const statusClass = `status-${booking.status.split(' ')[0].toLowerCase()}`;
-        bookingsDiv.innerHTML += `
+        html += `
           <div class="booking-item">
             <div class="booking-details">
               <h3>${booking.name}</h3>
               <p class="booking-service">${booking.service}</p>
               <p class="booking-date">Date: ${new Date(booking.booking_date).toLocaleDateString()}</p>
+              <span class="booking-status ${statusClass}">${booking.status}</span>
             </div>
-            <span class="booking-status ${statusClass}">${booking.status}</span>
           </div>
         `;
       });
+
+      activeBookingsDiv.innerHTML = html;
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-      displayBookings();
+      displayActiveBookings();
     });
   </script>
 </body>
