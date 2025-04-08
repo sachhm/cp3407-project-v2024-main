@@ -1,0 +1,40 @@
+User Test Report
+Participant: Friend 1
+Date: April 8, 2025
+Platform: Desktop (Chrome)
+
+Task: Submit a Cleaning Booking
+Goal: Fill out the booking form and attempt a booking (test only, no real payment expected)
+
+Steps Taken:
+Landed on the "Book a Cleaning" page.
+
+Quickly filled in:
+
+- Full Name
+
+- Service Type
+
+- Preferred Date
+
+- Selected a Service Type from dropdown (e.g., Medium Clean)
+
+Clicked “Book Now”.
+
+Received confirmation popup stating the booking was successful.
+
+Did not proceed to payment (as this was a test run).
+
+Feedback:
+“The form was super straightforward. No confusion at all.”
+
+“I saw the payment button but didn’t click it since I wasn’t actually booking anything.”
+
+“Might be nice if the payment button said something like ‘Proceed to Payment’ so it's more obvious it comes after booking.”
+
+Success Criteria:
+Booking data was submitted ✅
+
+User understood the process ✅
+
+Payment skipped intentionally (as planned) ✅
