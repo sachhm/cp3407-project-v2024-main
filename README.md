@@ -1,7 +1,9 @@
 # MyClean - Cleaning Service Management Platform
 
 # Links:
-https://d35h8x1v6ztt7q.cloudfront.net/index.html
+The site live: https://d35h8x1v6ztt7q.cloudfront.net/index.html
+
+Mockup: https://ninjamock.com/s/H16S5Lx
 
 ## Team
 1. Sachh Ariel Moka (Team Lead, Backend Development)
