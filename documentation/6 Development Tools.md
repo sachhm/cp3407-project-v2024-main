@@ -188,6 +188,9 @@ module.exports = {
    - Project management features
    - Code review capabilities
 
+3. **NinjaMock**
+   - https://ninjamock.com/s/H16S5Lx
+
 ### Cloud Services
 1. **AWS**
    - Global CDN network

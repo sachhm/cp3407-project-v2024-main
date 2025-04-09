@@ -4,7 +4,20 @@
 MyClean implements automated testing using Jest to ensure data validation, business logic, and error handling work as expected. The tests follow Test-Driven Development (TDD) principles.
 
 ## User Testing
+Usability Test – April 8, 2025
+Participant: Friend 1 (Desktop, Chrome)
+Task: Submit a Cleaning Booking
+Results:
+- Successfully filled and submitted the booking form
+- Skipped payment (as planned)
+- Booking confirmation displayed as expected
+Feedback:
+- “Form was super straightforward.”
+- “Maybe label the payment button ‘Proceed to Payment’.”
 
+✅ Booking flow clear
+✅ User understood steps
+✅ No confusion during interaction
 ### External Review
 The application underwent user testing with an independent tester (a colleague of Jason's) who provided valuable feedback. The tester highlighted:
 - Clean and intuitive user interface
