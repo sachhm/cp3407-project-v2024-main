@@ -10,12 +10,12 @@ Checklist:
 
 
 User stories or tasks (see chapter 4):
-1. * Make a Booking | Priority: 10 | Estimate: 4 days
-2. * Manage Availability | Priority: 10 | Estimate: 5 days
-3. * Manage Providers | Priority: 10 | Estimate: 3 days
-4. * Generate Analytics | Priority: 8 | Estimate: 3 days
-5. * Process Payments | Priority: 2 | Estimate: 4 days
-6. * View Analytics | Priority: 5 | Estimate: 3 days
+1. * [Make a Booking](./user_stories/making_a_booking.md)| Priority: 10 | Estimate: 4 days
+2. * [Manage Availability](./user_stories/making_availability.md)| Priority: 10 | Estimate: 5 days
+3. * [Manage Providers](./user_stories/making_providers.md)| Priority: 10 | Estimate: 3 days
+4. * [Generate Analytics](./user_stories/generate_platform_analytics.md)| Priority: 8 | Estimate: 3 days
+5. * [Process Payments](./user_stories/make_a_payment.md)| Priority: 2 | Estimate: 4 days
+6. * [View Analytics](./user_stories/view_analytics.md)| Priority: 5 | Estimate: 3 days
 
 
 In progress:
@@ -49,7 +49,7 @@ Completed:
 - **Time estimation accuracy:** The original estimate of 15 days may have slightly underestimated the time needed for analytics work, especially as it involved both backend data aggregation and frontend charting.
 - **Code review lag:** Some pull requests remained open longer than expected due to overlapping responsibilities and reduced meeting frequency in Week 3.
 
-## Action Plan for Next Iteration
+## Proposed Action Plan for Next Iteration
 - **Complete and refine View Analytics:** Finalize this in the first few days of Iteration 3, including dashboard export and advanced metrics.
 - **Improve estimation for multi-layered stories:** Break down analytics-related stories into backend and frontend subtasks during sprint planning for more accurate scope and velocity tracking.
 - **Reinforce code review cadence:** Implement a “24-hour rule” to ensure pull requests are reviewed and merged in a timely manner.
