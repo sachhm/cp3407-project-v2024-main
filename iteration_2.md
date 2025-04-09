@@ -4,26 +4,53 @@ Checklist:
 1. github entry timestamps
 2. User stories are correct: see p39
 
-* Assumed Velocity FROM iteration-1: ?? 
-* Number of developers: ??
-* Total estimated amount of work: YY days
+* Assumed Velocity: 5 days/week (same as iteration-1)
+* Number of developers: 2
+* Total estimated amount of work: 15 days
+
 
 User stories or tasks (see chapter 4):
-1. [user story or task title](./user_stories/user_story_01_title.md), priority XX, YY days 
-2. ...
+1. * Make a Booking | Priority: 10 | Estimate: 4 days
+2. * Manage Availability | Priority: 10 | Estimate: 5 days
+3. * Manage Providers | Priority: 10 | Estimate: 3 days
+4. * Generate Analytics | Priority: 8 | Estimate: 3 days
+5. * Process Payments | Priority: 2 | Estimate: 4 days
+6. * View Analytics | Priority: 5 | Estimate: 3 days
+
 
 In progress:
 * Task-2 (developer name or initials), date started
-* ...
 
 Completed:
-* Task-3 (developer name or initials), date completed
-* ...
+* Make a Booking (JK), 05/04/2025
+* Manage Availability (SM), 29/03/2025
+* Process Payments (JK), 01/04/2025
+* Manage Providers (SM), 03/04/2025
+* Generate Analytics (SM), 30/03/2025
+
 
 ### Burn Down for iteration-2 (see chapter 4):
-Update this at least once per week
-* 4 weeks left, xx days of estimated amount of work 
-* 2 weeks left, xx days
-* 1 weeks left, xx days
-* 0 weeks left, xx days
-* Actual Velocity: ?? 
+* 4 weeks left, 15 days of estimated amount of work
+* 2 weeks left, 7 days
+* 1 week left, 2 days
+* 0 weeks left, 0 days
+* Actual Velocity: 3.75 days/week
+
+# Retrospective for Iteration 2
+
+## What Went Well
+- **Core functionality completed ahead of expectations:** Key user stories such as *Make a Booking*, *Manage Availability*, and *Manage Providers* were not only completed on time but delivered with stable, tested implementations.
+- **Successful Payment Integration:** The Stripe-powered payment system was integrated without major issues and is now fully functional, meeting both security and usability standards.
+- **Productivity remained consistent:** Despite the slightly lower velocity than planned (3.75 days/week), all high-priority tasks were completed within the iteration timeframe.
+- **Collaborative development and workload split:** Both developers contributed effectively across frontend and backend tasks, minimizing bottlenecks.
+
+## Areas for Improvement
+- **Analytics features fell short of full delivery:** The *View Analytics* story remained in progress at the end of the sprint, partly due to complexities in handling real-time data and dashboard rendering.
+- **Time estimation accuracy:** The original estimate of 15 days may have slightly underestimated the time needed for analytics work, especially as it involved both backend data aggregation and frontend charting.
+- **Code review lag:** Some pull requests remained open longer than expected due to overlapping responsibilities and reduced meeting frequency in Week 3.
+
+## Action Plan for Next Iteration
+- **Complete and refine View Analytics:** Finalize this in the first few days of Iteration 3, including dashboard export and advanced metrics.
+- **Improve estimation for multi-layered stories:** Break down analytics-related stories into backend and frontend subtasks during sprint planning for more accurate scope and velocity tracking.
+- **Reinforce code review cadence:** Implement a “24-hour rule” to ensure pull requests are reviewed and merged in a timely manner.
+- **Introduce automated test coverage for data-driven features** to avoid regressions as analytics complexity grows.
