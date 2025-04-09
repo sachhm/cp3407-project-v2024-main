@@ -21,3 +21,12 @@ Admins can access a dashboard displaying key metrics such as the number of activ
 1. Design dashboard layout – Estimation: 0.5 day  
 2. Display key metrics (e.g., total users, revenue) on dashboard – Estimation: 0.5 day  
 3. Implement API calls to fetch data – Estimation: 2 days  
+
+
+# UI Design:
+* The view analytics offers a simple numbers first approach to viewing user stats
+* Insert mockup design screenshot here (e.g. using tools like [ninjamock.com](https://ninjamock.com/)).
+* ![mockup](<img/platform analytics mockup.png>)
+
+# Completed:
+* ![actual](<img/platform analytics actual.png>)

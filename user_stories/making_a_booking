@@ -21,7 +21,7 @@ Description-v1: Customers will have a simple and straightforward booking process
 
 # UI Design:
 * The booking form will have dropdowns for cleaning services, date/time pickers, and an address input field.  
-* Insert mockup design screenshot here (e.g. using tools like [ninjamock.com](https://ninjamock.com/)).
+* ![mockup](<img/make a booking mockup.png>)
 
 # Completed:
-
+* ![actual](<img/make a booking actual.png>)

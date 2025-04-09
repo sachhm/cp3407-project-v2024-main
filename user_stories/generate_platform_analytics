@@ -1,7 +1,7 @@
 # User story title: Generate Platform Analytics Reports
 
 ## Priority: 8 (e.g. latest for iteration-1)
-This feature is importnat for business intelligence and strategic decision making, as well as general reporting on performance. 
+This feature is important for business intelligence and strategic decision making, as well as general reporting on performance. 
 
 ## Estimation:
 * Sachh: 3 days
@@ -21,8 +21,8 @@ Description-v1: The admin can generate comprehensive reports about platform perf
 4. Add date range and filter capabilities (Estimation: 0.5 days)
 
 # UI Design:
-* The report generator would have a dashboard with amultiple widgets displaying key metrics and export options such as format and date range.
-* Insert mockup design screenshot here (e.g. using tools like [ninjamock.com](https://ninjamock.com/)).
+* *The screenshots are for view analytics, but the fact that these are dynamoically generated means that they are both sort of the same thing, this is just on the backend*
+* ![mockup](<img/platform analytics mockup.png>)
 
 # Completed:
-
+* ![actual](<img/platform analytics actual.png>)

@@ -21,3 +21,10 @@ The customer will be able to select their preferred payment method, input paymen
 2. Set up secure payment page with input fields for credit card details – Estimation: 1 day  
 3. Implement payment confirmation and receipt generation – Estimation: 1 day  
 4. Test payment flow for different payment methods – Estimation: 1 day
+
+# UI Design:
+* The report generator would have a dashboard with amultiple widgets displaying key metrics and export options such as format and date range.
+* *No mockup done as external library was used*
+
+# Completed:
+* ![actual](<img/payment.png>)

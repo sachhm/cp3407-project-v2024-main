@@ -25,7 +25,8 @@ Description-v1: The admin can view, approve, suspend, or reject service provider
 
 # UI Design:
 * The dashboard will have various metrics showing providers profiles, along with details on verification status, reviews, etc. 
-* Insert mockup design screenshot here (e.g. using tools like [ninjamock.com](https://ninjamock.com/)).
+* ![mockup](<img/add provider mockup.png>)
 
 # Completed:
-
+* ![actual](<img/add provider actual.png>)
+* ![alt text](<img/current providers.png>)

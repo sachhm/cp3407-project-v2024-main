@@ -24,7 +24,8 @@ Description-v1: The cleaner will have the ability to create and update their pro
 # UI Design:
 * The cleaner profile page will have a simple layout with input fields for personal details and service offerings.
 * A calendar view will be used to display available time slots for booking.
-* Insert mockup design screenshots here (e.g. using tools like [ninjamock.com](https://ninjamock.com/)).
+* ![mockup](<img/availability mockup.png>)
 
 # Completed:
+* ![actual](<img/availability actual.png>)
 
