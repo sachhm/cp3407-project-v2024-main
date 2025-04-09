@@ -39,7 +39,9 @@ MyClean's implementation was executed across two iterations, delivering core fun
    );
    ```
 
-3. **Provider Management**
+- ![alt text](img/supabase-schema-mgbekoeqtysnuoshxwup.png)
+
+1. **Provider Management**
    - Dashboard for service providers
    - Availability management system
    - Service type configuration

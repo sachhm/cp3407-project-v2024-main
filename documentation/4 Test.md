@@ -82,14 +82,12 @@ This real-world testing confirmed our focus on user experience and validated our
 
 ## Test Results
 
-### Latest Run Summary
-```plaintext
-Test Suites: 1 passed, 1 total
-Tests:       10 passed, 10 total
-Snapshots:   0 total
-Time:        0.112 s
-```
+### Screenshots
+- Tests failed first
+![alt text](<img/tests failing.png>)
 
+- Tests passed after implemetations
+![alt text](<img/tests passing.png>)
 ### Validation Tests
 All validation tests pass:
 - Required field validation

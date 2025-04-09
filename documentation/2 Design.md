@@ -4,8 +4,7 @@
 MyClean's architecture was designed with scalability, maintainability, and user experience as core principles. Our design choices reflect modern web development practices while ensuring robust functionality.
 
 ## Architectural Design
-
-
+![uml](<img/architecture uml.png>)
 
 ### System Architecture
 ```mermaid
