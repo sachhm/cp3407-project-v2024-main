@@ -1,4 +1,4 @@
-# Actual iteration-1 board, (see chapters 3 and 4), add your start and end dates 
+# Actual iteration-1 board, (see chapters 3 and 4), 12.02.25 - 7.03.25
 
 Checklist: 
 1. github entry timestamps
@@ -14,10 +14,11 @@ User stories or tasks:
 3. [View analytics](./user_stories/view_analytics.md), priority 5, 3 days
 
 In progress:
-* Task-1 (Jason), date started: 12.02.25
+* View analytics (Sachh), date started: 12.02.25
 
 Completed:
-* Task-2 (Sachh), date completed: 19.02.25
+* Manage availability (Sachh), date completed: 7.03.25
+* Make a booking (Jason), date completed: 7.03.25
 
 ### Burn Down for iteration-1:
 * 4 weeks left, 10 days of estimated amount of work
