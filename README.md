@@ -5,68 +5,60 @@
 2. Jason James Keatley (Frontend Development, UX Design)
 
 ## Project Overview
-MyClean is a comprehensive platform that connects cleaning service providers with customers while streamlining booking management and analytics. The system aims to modernize the cleaning service industry through digital transformation.
+MyClean is a comprehensive platform connecting cleaning service providers with customers while streamlining booking management and analytics.
 
 ## Core Features
-- Seamless booking management system
+- Booking management system
 - Real-time availability tracking
-- Secure payment processing
-- Advanced analytics dashboard
+- Payment processing via Stripe
+- Analytics dashboard
 - Provider management portal
-
 
 ## Project Timeline
 ### Iteration 1 (Feb 15 - March 7, 2024)
 Focus: Core Booking System & Provider Management
-[Details in iteration_1.md]
 
 ### Iteration 2 (March 8 - March 29, 2024)
 Focus: Payments & Analytics
-[Details in iteration_2.md]
 
-# Assignment-1: project planning BEFORE iteration-1, (see chapters 1-3)
-Checklist/TODOs: 
-* Update the following during each week prac session
-* github entry timestamp is BEFORE the iteration-1
-* User stories are correct: see p39
-* Must have more user stories than fits into iterations 1 and 2. To practice the priority.
+## User Stories (Backlog)
+1. **Make a Booking** | Priority: 10 | Estimate: 4 days
+   - *Description*: As a customer, I want to book a cleaning service so that I can schedule a cleaner.
 
+2. **Manage Availability** | Priority: 10 | Estimate: 5 days
+   - *Description*: As a cleaner, I want to set my available dates so customers can book me.
 
-# Assignment-2: Iterations
+3. **Manage Providers** | Priority: 10 | Estimate: 3 days
+   - *Description*: As an admin, I want to manage service providers so I can maintain quality control.
 
-## Iteration 1 [duration 3-4 weeks], add your start and end dates 
+4. **Generate Analytics** | Priority: 8 | Estimate: 3 days
+   - *Description*: As an admin, I want to view platform metrics so I can track performance.
 
-* Goal is to have 2 iterations during a trimester of teaching.
-* Update the following during each week prac session
-* During pracs, you may experiment with using other github ways of tracking changes, e.g. via pull requests.
+5. **Process Payments** | Priority: 2 | Estimate: 4 days
+   - *Description*: As a customer, I want to pay for services securely.
 
-[User Stories](https://github.com/sachhm/cp3407-project-v2024-main/tree/main/user_stories)
+6. **View Analytics** | Priority: 5 | Estimate: 3 days
+   - *Description*: As an admin, I want detailed reports for decision making.
 
-### **Iteration 1 Goals**  
+## Iterations
 
-- [ ] **[Generate Platform Analytics](./user_stories/generate_platform_analytics)** | Priority: Low | Estimate: 3 days  
-- [ ] **[Make a Payment](./user_stories/make_a_payment)** | Priority: Low | Estimate: 4 days  
-- [ ] **[Make a Booking](./user_stories/making_a_booking)** | Priority: High | Estimate: 4 days  
-- [ ] **[Manage Availability](./user_stories/manage_booking)** | Priority: High | Estimate: 5 days  
-- [ ] **[Manage Providers](./user_stories/manage_providers)** | Priority: High | Estimate: 3 days  
-- [ ] **[View Analytics](./user_stories/view_analytics)** | Priority: Medium | Estimate: 3 days  
+### Iteration 1 Goals
+- [x] Make a Booking
+- [x] Manage Availability
+- [x] Manage Providers
 
-**Total Estimate**: 19 days
+### Iteration 2 Goals
+- [x] Process Payments
+- [ ] Generate Analytics
+- [ ] View Analytics
 
+### Deprioritized Stories
+1. Advanced reporting features
+2. Email notifications
+3. Mobile app development
 
-### Iteration 2 [duration 3-4 weeks], add your start and end dates
-Goal is to have 2 iterations during a trimester of teaching.
-1. [user story title](./user_stories/user_story_01_title.md), priority XX, YY days 
-2. ...
-
-Total: YY days
-
-### Not enough time/developers: 
-1. [user story title](./user_stories/user_story_01_title.md), priority XX, YY days 
-2. ...
-
-Total: YY days
-
-# Actual iterations
-1. [Iteration-1](./iteration_1.md)
-2. [Iteration-2](./iteration_2.md)
+## Development Tools
+- Frontend: HTML5, CSS3, JavaScript
+- Backend: Supabase
+- Hosting: AWS S3
+- Testing: Jest

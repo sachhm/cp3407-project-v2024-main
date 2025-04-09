@@ -5,6 +5,8 @@ MyClean's architecture was designed with scalability, maintainability, and user 
 
 ## Architectural Design
 
+
+
 ### System Architecture
 ```mermaid
 graph TD
