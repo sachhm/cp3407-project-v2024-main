@@ -52,7 +52,7 @@ Focus: Payments & Analytics
 - [x] Generate Analytics
 - [x] View Analytics
 
-### Deprioritized Stories
+### Handling Constraints
 - Due to the constrants of time and limited human resources we deprioritized serveral stories including:
 1. Advanced reporting features
 2. Email notifications
